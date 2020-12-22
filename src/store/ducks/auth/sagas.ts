@@ -13,11 +13,17 @@ import history from '../../../services/history';
 /** TYPES */
 import { ISession, ILogin } from './types';
 
-export function* authRequest({ email, password }: ILogin) {
+interface IPayload {
+  payload: {
+    data: ILogin;
+  };
+}
+
+export function* authRequest({ payload }: IPayload) {
   try {
-    const response = yield call(api.post, 'sessions', {
-      email,
-      password,
+    const response = yield call(api.post, 'login', {
+      email: payload.data.email,
+      password: payload.data.password,
     });
 
     const session: ISession = response.data;

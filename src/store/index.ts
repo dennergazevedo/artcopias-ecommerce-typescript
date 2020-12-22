@@ -3,12 +3,14 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import { IAuthState } from './ducks/auth/types';
+import { IClientState } from './ducks/client/types';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
 
 export interface IApplicationState {
   auth: IAuthState;
+  client: IClientState;
 }
 
 const persistConfig = {

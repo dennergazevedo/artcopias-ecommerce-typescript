@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+/** Toast */
+import { ToastContainer } from 'react-toastify';
+
 /* Redux */
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -9,6 +12,7 @@ import store from './store';
 
 /** Global Styles */
 import GlobalStyles from './styles/global';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +21,7 @@ const App: React.FC = () => {
         <GlobalStyles />
         <Router>
           <Routes />
+          <ToastContainer autoClose={3000} />
         </Router>
       </PersistGate>
     </Provider>
