@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 
 export const Title = styled.div`
@@ -12,8 +13,8 @@ export const Title = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  color: #333;
+  background-color: #333;
+  color: #fff;
   font-size: 16px;
   width: 100%;
   border-radius: 5px;

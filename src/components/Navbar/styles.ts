@@ -12,7 +12,7 @@ export const Navbar = styled.div`
   padding-left: 20px;
   padding-right: 20px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 940px) {
     flex-direction: column;
     height: auto;
     align-items: flex-start;
@@ -43,8 +43,8 @@ export const Left = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
+  @media only screen and (max-width: 940px) {
+    flex-wrap: wrap;
     align-items: flex-start;
   }
 `;
@@ -55,7 +55,7 @@ export const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 940px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -80,7 +80,7 @@ export const ItemNav = styled.a`
   font-weight: 400;
   margin-right: 20px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 940px) {
     margin-top: 10px;
   }
 
@@ -107,7 +107,7 @@ export const ItemNavDiv = styled.div`
   font-weight: 400;
   margin-right: 20px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 940px) {
     margin-top: 10px;
   }
 
@@ -127,6 +127,7 @@ export const Divider = styled.hr`
   align-self: center;
   border-top: 1px solid #3335;
   width: 90%;
+  margin: 20px;
 `;
 
 export const Profile = styled.div`

@@ -109,7 +109,7 @@ function LojaNavbar({ data, signed }: IProps) {
 
   return (
     <>
-      {screen.width < 800 || window.innerWidth < 800 ? (
+      {screen.width < 940 || window.innerWidth < 940 ? (
         <>
           <Menu>
             <FaBars

@@ -16,7 +16,7 @@ import history from '../../services/history';
 import circle from '../../assets/img/circle.png';
 
 // STYLED COMPONENTS
-import { Container, ImgDiv, Nome, Price, Unidade } from './styles.js';
+import { Container, ImgDiv, Nome, Price, Unidade } from './styles';
 
 /** Interfaces */
 interface IProps {

@@ -4,6 +4,7 @@ import React from "react";
 // COMPONENTS
 import Payment from '../Payment';
 import ZapPlugin from '../ZapPlugin';
+import Card from '../Card';
 
 // STYLED-COMPONENTS
 import {
@@ -14,6 +15,7 @@ const Footer: React.FC = () => {
     return (
       <>
       <Payment />
+      <Card />
       <Container>
         <span>
           © ArtCópias {new Date().getFullYear()} - Todos os direitos reservados -

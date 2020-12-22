@@ -12,7 +12,7 @@ import {
     Container,
     Item,
     Social
-} from './styles.js';
+} from './styles';
 
 const Card: React.FC = () => {
 

@@ -12,7 +12,7 @@ import { IAuth } from '../../store/ducks/auth/types';
 import api from '../../services/api';
 
 /** Styled Components */
-import { Container, Title, Body } from './styles.js';
+import { Container, Title, Body } from './styles';
 
 /** Components */
 import Product from '../Product';
@@ -28,10 +28,10 @@ interface IMapProduct {
 }
 
 interface IProps {
-  profile: IAuth;
+  data: IAuth;
 }
 
-function Destaques({ profile }: IProps) {
+function Destaques({ data }: IProps) {
   useEffect(() => {
     loadProducts();
   }, []);
@@ -39,8 +39,8 @@ function Destaques({ profile }: IProps) {
   const [products, setProducts] = useState<IMapProduct[]>([]);
 
   async function loadProducts() {
-    const { data } = await api.get('search_star');
-    setProducts(data);
+    const response = await api.get('search_star');
+    setProducts(response.data);
   }
 
   return (
@@ -54,7 +54,7 @@ function Destaques({ profile }: IProps) {
         <Body>
           {products.map(item => (
             <div key={item.id}>
-              <Product product={item} profile={profile} />
+              <Product product={item} profile={data} />
             </div>
           ))}
         </Body>

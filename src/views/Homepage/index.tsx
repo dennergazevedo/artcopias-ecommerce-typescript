@@ -7,6 +7,9 @@ import Footer from '../../components/Footer';
 import HiperDestaque from '../../components/HiperDestaque';
 import Sidebar from '../../components/Sidebar';
 import Slider from '../../components/Slider';
+import InfoNav from '../../components/InfoNav';
+import MobileNav from '../../components/MobileNav';
+import Destaques from '../../components/Destaques';
 
 /** Styled Components */
 import { Container, Body } from './styles';
@@ -16,10 +19,12 @@ const HomePage: React.FC = () => {
     <>
       <Navbar />
       <Slider />
+      <InfoNav />
+      {screen.width < 800 && <MobileNav />}
       <Container>
-        {screen.width > 650 && <Sidebar />}
+        {screen.width > 700 && <Sidebar />}
         <Body>
-          <span>teste</span>
+          <Destaques />
         </Body>
       </Container>
       <HiperDestaque />

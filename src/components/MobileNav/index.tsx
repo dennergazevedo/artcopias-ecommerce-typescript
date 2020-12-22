@@ -9,24 +9,19 @@ import { Container } from './styles';
 import history from '../../services/history';
 
 const MobileNav: React.FC = () => {
+  function handleRedirect(local: string) {
+    history.push(`/products_menu/${local}`);
+    window.location.reload();
+  }
+
   return (
     <Container>
-      <span onClick={() => history.push('/products_menu/Covid')}>COVID 19</span>
-      <span onClick={() => history.push('/products_menu/Adesivos')}>
-        ADESIVOS
-      </span>
-      <span onClick={() => history.push('/products_menu/Lonas')}>
-        LONAS / BANNER
-      </span>
-      <span onClick={() => history.push('/products_menu/Brindes')}>
-        BRINDES
-      </span>
-      <span onClick={() => history.push('/products_menu/Festa')}>
-        FAÇA SUA FESTA
-      </span>
-      <span onClick={() => history.push('/products_menu/Empresarial')}>
-        EMPRESARIAL
-      </span>
+      <span onClick={() => handleRedirect('Covid')}>COVID 19</span>
+      <span onClick={() => handleRedirect('Adesivos')}>ADESIVOS</span>
+      <span onClick={() => handleRedirect('Lonas')}>LONAS / BANNER</span>
+      <span onClick={() => handleRedirect('Brindes')}>BRINDES</span>
+      <span onClick={() => handleRedirect('Festa')}>FAÇA SUA FESTA</span>
+      <span onClick={() => handleRedirect('Empresarial')}>EMPRESARIAL</span>
     </Container>
   );
 };

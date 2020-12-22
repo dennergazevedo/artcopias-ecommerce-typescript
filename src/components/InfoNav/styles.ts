@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  max-width: 100vw;
+  width: 100%;
   background-color: #9995;
   color: #333;
   padding-left: 20px;
@@ -22,7 +23,7 @@ export const Item = styled.div`
   align-items: center;
   justify-content: center;
   margin: 20px;
-  width: 30vw;
+  width: 25vw;
   min-width: 250px;
 
   .iconItem {
