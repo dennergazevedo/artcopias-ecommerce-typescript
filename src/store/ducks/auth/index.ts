@@ -6,6 +6,7 @@ const INITIAL_STATE: IAuthState = {
     email: '',
     token: '',
     name: '',
+    provider: 0,
   },
   error: false,
   loading: false,
@@ -18,6 +19,7 @@ const reducer: Reducer<IAuthState> = (state = INITIAL_STATE, action) => {
       return { ...state, loading: true };
     case AuthTypes.AUTH_SUCCESS:
       return {
+        ...state,
         loading: false,
         signed: true,
         error: false,
@@ -25,17 +27,19 @@ const reducer: Reducer<IAuthState> = (state = INITIAL_STATE, action) => {
       };
     case AuthTypes.AUTH_FAILURE:
       return {
+        ...state,
         loading: false,
         error: true,
         signed: false,
-        data: { email: '', token: '', name: '' },
+        data: { email: '', token: '', name: '', provider: 0 },
       };
     case AuthTypes.AUTH_LOGOUT:
       return {
+        ...state,
         loading: false,
         error: false,
         signed: false,
-        data: { email: '', token: '', name: '' },
+        data: { email: '', token: '', name: '', provider: 0 },
       };
     default:
       return state;

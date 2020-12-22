@@ -1,0 +1,136 @@
+.mainContainerZapPlugin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 60px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    cursor: pointer;
+    z-index: 999999999999999;
+}
+
+.modalContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(12, 100, 0);
+  margin-top: 100px;
+  padding-bottom: 10px;
+}
+
+.modalHeaderZapPlugin{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    background-color: rgb(12, 100, 0);
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBodyZapPlugin{
+    background-color: #F2F2F2;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sendButtonZapPlugin{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(12, 100, 0);
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px 10px 20px;
+    background-color: #FFF;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.sendButtonZapPlugin:hover{
+    transition: all 0.5s;
+    background-color: #F2F2F2;
+}
+
+.inputZapPlugin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FFF;
+    width: 300px;
+    padding: 10px 10px 10px 10px;
+    font-family: Montserrat;
+    font-size: 12px;
+}
+
+.inputZapPlugin:focus{
+    box-shadow: 2px 2px 3px #0002;
+    background-color: #FFF9;
+    outline: 0;
+}
+
+.spanCamposZapPlugin{
+    display: flex;
+    font-family: Montserrat;
+    color: #E54;
+    font-size: 11px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px
+}
+
+.spanHeaderZapPlugin{
+    display: flex;
+    margin: 10px;
+    font-family: Montserrat;
+    font-size: 14px;
+    color: #FFF;
+    text-align: justify;
+}
+
+.buttonClose{
+  background-color: rgb(12, 100, 0);
+  padding: 10px;
+  font-weight: 500;
+  color: #FFF;
+  font-size: 12px;
+}
+
+.sendMessageZapPlugin{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid rgb(12, 100, 0);
+    box-shadow: 1px 1px 3px #3333;
+    background-color: #FFF;
+    border-radius: 5px;
+    margin-top: 100px;
+}
+
+.spanSendZapPlugin{
+    color: rgb(12, 100, 0);
+    font-size: 16px;
+    margin: 10px;
+    font-weight: 500;
+}
+
+.span2SendZapPlugin{
+    color: #000;
+    font-size: 12px;
+    margin: 10px;
+    margin-bottom: 10px;
+}

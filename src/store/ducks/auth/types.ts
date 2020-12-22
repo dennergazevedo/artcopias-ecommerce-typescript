@@ -13,6 +13,7 @@ export interface IAuth {
   email: string;
   token: string;
   name: string;
+  provider: number;
 }
 
 /** Session types */
@@ -22,6 +23,7 @@ export interface IUser {
   phone: string;
   document: string;
   email: string;
+  provider: number;
 }
 
 export interface ILogin {

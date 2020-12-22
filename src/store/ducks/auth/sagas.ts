@@ -29,6 +29,7 @@ export function* authRequest({ email, password }: ILogin) {
         email: session.user.email,
         name: session.user.name,
         token: session.token,
+        provider: session.user.provider,
       }),
     );
     toast.success('Logado com sucesso! Redirecionando...', {

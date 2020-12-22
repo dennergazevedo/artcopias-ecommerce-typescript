@@ -30,13 +30,13 @@ import {
 } from 'react-icons/fa';
 
 /** Assets */
-import Logo from '../../../assets/img/logo.png';
+import Logo from '../../assets/img/logo.png';
 
 /** Services */
-import store, { IApplicationState } from '../../../store';
-import { IAuth, AuthTypes } from '../../../store/ducks/auth/types';
-import api from '../../../services/api';
-import history from '../../../services/history';
+import store, { IApplicationState } from '../../store';
+import { IAuth, AuthTypes } from '../../store/ducks/auth/types';
+import api from '../../services/api';
+import history from '../../services/history';
 
 /** Styled Components */
 import {
@@ -54,7 +54,7 @@ import {
 } from './styles';
 
 /** Components */
-import Search from '../../Search';
+import Search from '../Search';
 
 /** Props Interface */
 interface IProps {

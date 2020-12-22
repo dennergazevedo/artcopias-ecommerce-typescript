@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 /** Pages */
-import Homepage from '../views/Store/Homepage';
+import Homepage from '../views/Homepage';
 import NotFound from '../views/NotFound';
 
 const Routes: React.FC = () => (
