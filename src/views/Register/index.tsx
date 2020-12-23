@@ -10,12 +10,11 @@ import InputMask from 'react-input-mask';
 import validator from 'validator';
 import validarCPF from 'validar-cpf';
 
-/** Redux */
-import { connect } from 'react-redux';
-import { FaUserAlt, FaUserPlus } from 'react-icons/fa';
-import store, { IApplicationState } from '../../store';
-
 /** Icons */
+import { FaUserAlt, FaUserPlus } from 'react-icons/fa';
+
+/** Redux */
+import store from '../../store';
 
 /** Styled Components */
 import { Container, Left, Right, Title, Form } from './styles';
@@ -31,13 +30,7 @@ import Footer from '../../components/Footer';
 import { ClientTypes } from '../../store/ducks/client/types';
 import { AuthTypes } from '../../store/ducks/auth/types';
 
-/** Interfaces */
-interface IProps {
-  loading: boolean;
-  error: boolean;
-}
-
-const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
+const Cadastro: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -248,9 +241,4 @@ const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
   );
 };
 
-const mapStateToProps = ({ client }: IApplicationState) => ({
-  loading: client.loading,
-  error: client.error,
-});
-
-export default connect(mapStateToProps)(Cadastro);
+export default Cadastro;

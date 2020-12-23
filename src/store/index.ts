@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import { IAuthState } from './ducks/auth/types';
 import { IClientState } from './ducks/client/types';
+import { IMailState } from './ducks/mail/types';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
@@ -11,6 +12,7 @@ import rootSaga from './ducks/rootSaga';
 export interface IApplicationState {
   auth: IAuthState;
   client: IClientState;
+  mail: IMailState;
 }
 
 const persistConfig = {

@@ -5,9 +5,9 @@ import store from '../store';
 interface IProps {
   component: React.FC;
   path: string;
-  exact: boolean;
-  isPrivate: boolean;
-  isRegister: boolean;
+  exact?: boolean;
+  isPrivate?: boolean;
+  isRegister?: boolean;
 }
 
 const PrivateRoute: React.FC<IProps> = ({
@@ -29,4 +29,11 @@ const PrivateRoute: React.FC<IProps> = ({
 
   return <Route path={path} exact={exact} component={Component} />;
 };
+
+PrivateRoute.defaultProps = {
+  isPrivate: false,
+  isRegister: false,
+  exact: false,
+};
+
 export default PrivateRoute;
