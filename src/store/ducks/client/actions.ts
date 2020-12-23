@@ -18,3 +18,12 @@ interface IForgotPass {
 }
 export const clientForgotPassRequest = (data: IForgotPass) =>
   action(ClientTypes.CLIENT_FORGOTPASS, { data });
+
+/** ResetPass */
+interface IResetPass {
+  email: string;
+  token: string;
+  password: string;
+}
+export const clientResetPassRequest = (data: IResetPass) =>
+  action(ClientTypes.CLIENT_FORGOTPASS, { data });

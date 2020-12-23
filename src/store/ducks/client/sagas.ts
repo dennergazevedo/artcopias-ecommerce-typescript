@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects';
@@ -37,15 +38,15 @@ export function* clientRegisterRequest({ data }: IRegister) {
   }
 }
 
-interface IResetPass {
+interface IForgotPass {
   data: {
     email: string;
   };
 }
 
-export function* forgotPass({ data }: IResetPass) {
+export function* forgotPass({ data }: IForgotPass) {
   try {
-    yield call(api.post, 'reset_pass', { email: data.email });
+    yield call(api.post, 'forgot_pass', { email: data.email });
 
     toast.success(
       'Sucesso! Um e-mail foi enviado para seu e-mail com os passos para recuperação!',
@@ -56,5 +57,35 @@ export function* forgotPass({ data }: IResetPass) {
       'Oops! Não foi possível recuperar a sua senha! Verifique os dados e tente novamente.',
       { position: 'bottom-center' },
     );
+  }
+}
+
+interface IResetPass {
+  data: {
+    email: string;
+    token: string;
+    password: string;
+  };
+}
+
+export function* resetPass({ data }: IResetPass) {
+  try {
+    yield call(api.post, 'reset_pass', {
+      email: data.email,
+      token: data.token,
+      password: data.password,
+    });
+
+    toast.success('Sua senha foi atualizada com sucesso!', {
+      position: 'bottom-center',
+    });
+    setTimeout(function () {
+      window.location.href = '/';
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    toast.error('Oops! Não foi possível atualizar a sua senha!.', {
+      position: 'bottom-center',
+    });
   }
 }
