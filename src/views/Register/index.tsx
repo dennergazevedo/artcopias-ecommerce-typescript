@@ -23,7 +23,6 @@ import { Container, Left, Right, Title, Form } from './styles';
 import history from '../../services/history';
 
 /** Components */
-import MandeUmZap from '../../components/ZapPlugin';
 import Slider from '../../components/Slider';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -108,7 +107,6 @@ const Cadastro: React.FC = () => {
   return (
     <>
       <Navbar />
-      <MandeUmZap />
       <Slider />
       <Container>
         <Left>

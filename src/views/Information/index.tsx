@@ -16,7 +16,6 @@ import {
 /** Components */
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import MandeUmZap from '../../components/ZapPlugin';
 
 /** Assets */
 import comocomprar from '../../assets/img/comocomprar.png';
@@ -48,7 +47,6 @@ const Information: React.FC = () => {
   return (
     <>
       <Navbar />
-      <MandeUmZap />
       <Container>
         <Menu>
           <div onClick={() => setMenu(1)}>

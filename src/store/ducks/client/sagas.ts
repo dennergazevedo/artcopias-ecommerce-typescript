@@ -89,3 +89,42 @@ export function* resetPass({ data }: IResetPass) {
     });
   }
 }
+
+interface IPartner {
+  data: {
+    name: string;
+    email: string;
+    phone: string;
+    document: string;
+    city: string;
+    message: string;
+  };
+}
+
+export function* bePartner({ data }: IPartner) {
+  console.log(data);
+  try {
+    yield call(api.post, 'be_partner', {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      document: data.document,
+      city: data.city,
+      message: data.message,
+    });
+
+    toast.success('Seu formulário foi enviado com sucesso!', {
+      position: 'bottom-center',
+    });
+    setTimeout(function () {
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    toast.error(
+      'Oops! Não foi enviar o seu formulário, tente novamente mais tarde!',
+      {
+        position: 'bottom-center',
+      },
+    );
+  }
+}

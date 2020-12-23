@@ -27,3 +27,15 @@ interface IResetPass {
 }
 export const clientResetPassRequest = (data: IResetPass) =>
   action(ClientTypes.CLIENT_FORGOTPASS, { data });
+
+/** Be a Partner */
+interface IPartner {
+  name: string;
+  email: string;
+  phone: string;
+  document: string;
+  city: string;
+  message: string;
+}
+export const clientPartnerRequest = (data: IPartner) =>
+  action(ClientTypes.CLIENT_PARTNER, { data });

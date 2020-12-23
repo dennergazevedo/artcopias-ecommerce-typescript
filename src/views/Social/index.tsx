@@ -9,7 +9,6 @@ import { FaInstagram } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import MandeUmZap from '../../components/ZapPlugin';
 
 /** Assets */
 import wpp from '../../assets/img/WHATS.png';
@@ -33,7 +32,6 @@ const Social: React.FC = () => {
   return (
     <>
       <Navbar />
-      <MandeUmZap />
 
       <Container>
         <div>

@@ -4,7 +4,6 @@ import React from 'react';
 import Video from 'react-player';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import MandeUmZap from '../../components/ZapPlugin';
 import TermosText from '../../components/Text/TermosDeUso';
 
 /** Assets */
@@ -18,7 +17,6 @@ const TermosDeUso: React.FC = () => {
     <>
       <Navbar />
       <Video url={VideoIntro} playing width="100%" height="100%" />
-      <MandeUmZap />
       <Container>
         <h2>TERMOS DE USO</h2>
         <TermosText />

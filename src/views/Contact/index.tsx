@@ -15,7 +15,6 @@ import InputMask from 'react-input-mask';
 import Video from 'react-player';
 import validator from 'validator';
 import Footer from '../../components/Footer';
-import MandeUmZap from '../../components/ZapPlugin';
 import Navbar from '../../components/Navbar';
 
 /** Redux */
@@ -113,7 +112,6 @@ const Contato: React.FC = () => {
   return (
     <>
       <Navbar />
-      <MandeUmZap />
       <Video url={VideoIntro} playing width="100%" height="auto" />
       <Body>
         <Container>

@@ -18,7 +18,6 @@ import { ClientTypes } from '../../store/ducks/client/types';
 /** Components */
 import Slider from '../../components/Slider';
 import Destaques from '../../components/Destaques';
-import MandeUmZap from '../../components/ZapPlugin';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -57,7 +56,6 @@ const ForgotPassword: React.FC = () => {
     <>
       <Navbar />
       <Slider />
-      <MandeUmZap />
 
       <Container>
         <Form>

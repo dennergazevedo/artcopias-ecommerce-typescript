@@ -7,6 +7,7 @@ export default createGlobalStyle`
     outline: 0;
     box-sizing: border-box;
     border: none;
+    font-family: 'Montserrat', sans-serif;
   }
 
   body {
@@ -14,7 +15,6 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
   }
 

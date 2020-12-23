@@ -7,7 +7,12 @@ import { ClientTypes } from './client/types';
 import { MailTypes } from './mail/types';
 
 import { authRequest, authRequestByRegister, signOut } from './auth/sagas';
-import { clientRegisterRequest, forgotPass, resetPass } from './client/sagas';
+import {
+  clientRegisterRequest,
+  forgotPass,
+  resetPass,
+  bePartner,
+} from './client/sagas';
 import { mailContactRequest } from './mail/sagas';
 
 export default function* rootSaga() {
@@ -20,6 +25,7 @@ export default function* rootSaga() {
     takeLatest<any>(ClientTypes.CLIENT_REGISTER_SUCCESS, authRequestByRegister),
     takeLatest<any>(ClientTypes.CLIENT_FORGOTPASS, forgotPass),
     takeLatest<any>(ClientTypes.CLIENT_RESETPASS, resetPass),
+    takeLatest<any>(ClientTypes.CLIENT_PARTNER, bePartner),
     // MAIL
     takeLatest<any>(MailTypes.MAIL_CONTACT_REQUEST, mailContactRequest),
   ]);

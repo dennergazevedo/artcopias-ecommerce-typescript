@@ -15,7 +15,6 @@ import { FaUnlockAlt } from 'react-icons/fa';
 import Slider from '../../components/Slider';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import MandeUmZap from '../../components/ZapPlugin';
 
 /** Styled Components */
 import { Container, Form, Title, FormPassword } from './styles';
@@ -67,7 +66,6 @@ const ResetPassword: React.FC = () => {
     <>
       <Navbar />
       <Slider />
-      <MandeUmZap />
 
       <Container>
         <Form onSubmit={handleResetPass}>

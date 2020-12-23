@@ -12,6 +12,8 @@ import PrivacyPolicy from '../views/PrivacyPolicy';
 import UserTerms from '../views/UserTerms';
 import DeliveryTime from '../views/DeliveryTime';
 import ResetPassword from '../views/ResetPassword';
+import WorkWithUs from '../views/WorkWithUs';
+import SendCurriculum from '../views/SendCurriculum';
 
 import Register from '../views/Register';
 
@@ -32,6 +34,8 @@ const Routes: React.FC = () => (
       exact
       component={ResetPassword}
     />
+    <Route path="/work-with-us" exact component={WorkWithUs} />
+    <Route path="/send-curriculum" exact component={SendCurriculum} />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 
