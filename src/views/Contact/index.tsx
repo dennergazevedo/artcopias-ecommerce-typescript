@@ -80,6 +80,11 @@ const Contato: React.FC = () => {
               toast.info('Este processo pode demorar alguns minutos...', {
                 position: 'bottom-center',
               });
+              setName('');
+              setEmail('');
+              setMessage('');
+              setPhone('');
+              setSubject('');
             } else {
               toast.error('Sua mensagem deve conter no mínimo 15 caracteres!', {
                 position: 'bottom-center',

@@ -6,6 +6,11 @@ import Route from './Route';
 import Homepage from '../views/Homepage';
 import Social from '../views/Social';
 import Contact from '../views/Contact';
+import ForgotPassword from '../views/ForgotPassword';
+import Information from '../views/Information';
+import PrivacyPolicy from '../views/PrivacyPolicy';
+import UserTerms from '../views/UserTerms';
+import DeliveryTime from '../views/DeliveryTime';
 
 import Register from '../views/Register';
 
@@ -16,6 +21,12 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={Homepage} />
     <Route path="/social" exact component={Social} />
     <Route path="/contact" exact component={Contact} />
+    <Route path="/forgot-password" exact component={ForgotPassword} />
+    <Route path="/information" exact component={Information} />
+    <Route path="/politica-de-privacidade" exact component={PrivacyPolicy} />
+    <Route path="/termos-de-uso" exact component={UserTerms} />
+    <Route path="/prazos-de-entrega" exact component={DeliveryTime} />
+
     <Route path="/sign-up" exact component={Register} isRegister />
 
     <Route path="/" component={NotFound} />

@@ -36,3 +36,25 @@ export function* clientRegisterRequest({ data }: IRegister) {
     yield put(clientRegisterFailure());
   }
 }
+
+interface IResetPass {
+  data: {
+    email: string;
+  };
+}
+
+export function* forgotPass({ data }: IResetPass) {
+  try {
+    yield call(api.post, 'reset_pass', { email: data.email });
+
+    toast.success(
+      'Sucesso! Um e-mail foi enviado para seu e-mail com os passos para recuperação!',
+      { position: 'bottom-center' },
+    );
+  } catch (err) {
+    toast.error(
+      'Oops! Não foi possível recuperar a sua senha! Verifique os dados e tente novamente.',
+      { position: 'bottom-center' },
+    );
+  }
+}
