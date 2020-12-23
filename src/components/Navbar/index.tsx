@@ -79,6 +79,7 @@ function LojaNavbar({ data, signed }: IProps) {
 
   async function verifyToken() {
     if (data.email) {
+      api.defaults.headers.auth = `${data.token}`;
       try {
         await api.get('verify_token');
       } catch (err) {
@@ -311,6 +312,8 @@ function LojaNavbar({ data, signed }: IProps) {
                   <FaUserAlt className="iconNav" />
                   {!user ? (
                     <DropButton style={{ right: 30 }}>
+                      <div>{data.email}</div>
+
                       <div onClick={() => history.push('/orders')}>
                         <FaRegCheckCircle className="icon" />
                         Meus Pedidos

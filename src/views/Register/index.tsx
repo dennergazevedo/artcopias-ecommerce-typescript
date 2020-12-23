@@ -28,8 +28,8 @@ import MandeUmZap from '../../components/ZapPlugin';
 import Slider from '../../components/Slider';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Card from '../../components/Card';
 import { ClientTypes } from '../../store/ducks/client/types';
+import { AuthTypes } from '../../store/ducks/auth/types';
 
 /** Interfaces */
 interface IProps {
@@ -57,6 +57,9 @@ const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
         if (passwordReg.length >= 8) {
           if (validarCPF(cpf)) {
             if (name.length > 4) {
+              toast.info('Aguarde, processando...', {
+                position: 'bottom-center',
+              });
               store.store.dispatch({
                 type: ClientTypes.CLIENT_REGISTER_REQUEST,
                 data: {
@@ -82,6 +85,27 @@ const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
         }
       } else {
         toast.error('As senhas não batem!', { position: 'bottom-center' });
+      }
+    } else {
+      toast.error('Digite um e-mail válido!', { position: 'bottom-center' });
+    }
+  }
+
+  function handleLogin() {
+    if (validator.isEmail(email)) {
+      if (password.length >= 8) {
+        toast.info('Aguarde, processando...', { position: 'bottom-center' });
+        store.store.dispatch({
+          type: AuthTypes.AUTH_REQUEST,
+          data: {
+            email,
+            password,
+          },
+        });
+      } else {
+        toast.error('Sua senha deve ter no mínimo 8 caracteres!', {
+          position: 'bottom-center',
+        });
       }
     } else {
       toast.error('Digite um e-mail válido!', { position: 'bottom-center' });
@@ -129,7 +153,9 @@ const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
               </span>
             </div>
 
-            <button type="button">Entrar</button>
+            <button type="button" onClick={handleLogin}>
+              Entrar
+            </button>
           </Form>
         </Left>
         <Right>
@@ -217,7 +243,6 @@ const Cadastro: React.FC<IProps> = ({ loading, error }: IProps) => {
           </Form>
         </Right>
       </Container>
-      <Card />
       <Footer />
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
 import { put, call } from 'redux-saga/effects';
@@ -19,7 +20,47 @@ interface IPayload {
   };
 }
 
-export function* authRequest({ payload }: IPayload) {
+interface IData {
+  data: ILogin;
+}
+
+export function* authRequest({ data }: IData) {
+  try {
+    const response = yield call(api.post, 'login', {
+      email: data.email,
+      password: data.password,
+    });
+
+    const session: ISession = response.data;
+
+    api.defaults.headers.auth = `Bearer ${session.token}`;
+
+    yield put(
+      authSuccess({
+        email: session.user.email,
+        name: session.user.name,
+        token: session.token,
+        provider: session.user.provider,
+      }),
+    );
+
+    toast.success('Logado com sucesso! Redirecionando...', {
+      position: 'bottom-center',
+    });
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    toast.error('Falha na autenticação, verifique seus dados', {
+      position: 'bottom-center',
+    });
+    yield put(authFailure());
+  }
+}
+
+export function* authRequestByRegister({ payload }: IPayload) {
+  console.log(payload);
   try {
     const response = yield call(api.post, 'login', {
       email: payload.data.email,
@@ -28,7 +69,7 @@ export function* authRequest({ payload }: IPayload) {
 
     const session: ISession = response.data;
 
-    api.defaults.headers.Authorization = `Bearer ${session.token}`;
+    api.defaults.headers.auth = `Bearer ${session.token}`;
 
     yield put(
       authSuccess({
@@ -41,6 +82,10 @@ export function* authRequest({ payload }: IPayload) {
     toast.success('Logado com sucesso! Redirecionando...', {
       position: 'bottom-center',
     });
+
+    setTimeout(function () {
+      window.location.reload();
+    }, 3000);
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados', {
       position: 'bottom-center',
@@ -52,6 +97,6 @@ export function* authRequest({ payload }: IPayload) {
 export function signOut() {
   history.push('/');
   toast.success('Deslogado com sucesso! Redirecionando...', {
-    position: 'bottom-right',
+    position: 'bottom-center',
   });
 }

@@ -5,7 +5,7 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { AuthTypes } from './auth/types';
 import { ClientTypes } from './client/types';
 
-import { authRequest, signOut } from './auth/sagas';
+import { authRequest, authRequestByRegister, signOut } from './auth/sagas';
 import { clientRegisterRequest } from './client/sagas';
 
 export default function* rootSaga() {
@@ -13,6 +13,6 @@ export default function* rootSaga() {
     takeLatest<any>(AuthTypes.AUTH_REQUEST, authRequest),
     takeLatest(AuthTypes.AUTH_LOGOUT, signOut),
     takeLatest<any>(ClientTypes.CLIENT_REGISTER_REQUEST, clientRegisterRequest),
-    takeLatest<any>(ClientTypes.CLIENT_REGISTER_SUCCESS, authRequest),
+    takeLatest<any>(ClientTypes.CLIENT_REGISTER_SUCCESS, authRequestByRegister),
   ]);
 }
