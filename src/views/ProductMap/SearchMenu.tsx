@@ -69,7 +69,7 @@ const MenusMap: React.FC<IProps> = ({ data }: IProps) => {
 
   async function loadProducts(orden: string) {
     const { data }: IProductRequest = await api.get(
-      `/menu_product/${params.menu}/${params.name}`,
+      `/product_bymenu/${params.menu}`,
     );
     handleTotalPages(data);
     handleOrder(data, orden);
@@ -150,7 +150,7 @@ const MenusMap: React.FC<IProps> = ({ data }: IProps) => {
           <Title>
             <span style={{ width: '350px' }}>
               <FaAngleDoubleRight className="iconTitle" />
-              {`${params.menu} - ${params.name}`}
+              {`${params.menu}`}
             </span>
             <div>
               <span>

@@ -17,6 +17,8 @@ import SendCurriculum from '../views/SendCurriculum';
 import Budget from '../views/Budget';
 import AllProducts from '../views/ProductMap/AllProducts';
 import MenuProduct from '../views/ProductMap/MenuProduct';
+import SearchProduct from '../views/ProductMap/SearchProduct';
+import SearchMenu from '../views/ProductMap/SearchMenu';
 
 import Register from '../views/Register';
 
@@ -41,7 +43,9 @@ const Routes: React.FC = () => (
     <Route path="/send-curriculum" exact component={SendCurriculum} />
     <Route path="/budget" exact component={Budget} />
     <Route path="/all-products" exact component={AllProducts} />
-    <Route path="/menu-product/:menu/:product" exact component={MenuProduct} />
+    <Route path="/menu-product/:menu/:name" exact component={MenuProduct} />
+    <Route path="/search-product/:name" exact component={SearchProduct} />
+    <Route path="/search-bymenu/:menu" exact component={SearchMenu} />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 

@@ -16,7 +16,7 @@ const Search: React.FC = () => {
   async function handleSearch() {
     event?.preventDefault();
     if (search) {
-      history.push(`/find-product-bar/${search}`);
+      history.push(`/search-product/${search}`);
       location.reload();
     }
   }

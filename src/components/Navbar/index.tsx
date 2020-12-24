@@ -105,7 +105,7 @@ function LojaNavbar({ data, signed }: IProps) {
   }
 
   function handleMenu(menu: string) {
-    history.push(`/products_menu/${menu}`);
+    history.push(`/search-bymenu/${menu}`);
     window.location.reload();
   }
 
