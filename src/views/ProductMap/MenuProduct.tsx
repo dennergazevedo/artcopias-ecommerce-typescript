@@ -12,6 +12,7 @@ import { Pagination } from '@material-ui/lab';
 
 /** Redux */
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { IApplicationState } from '../../store';
 import { IAuth } from '../../store/ducks/auth/types';
 
@@ -50,7 +51,13 @@ interface IProps {
   data: IAuth;
 }
 
+interface IParams {
+  menu: string;
+  product: string;
+}
+
 const MenusMap: React.FC<IProps> = ({ data }: IProps) => {
+  const params = useParams<IParams>();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [page, setPage] = useState<number>(1);
   const [ordenacao, setOrdenacao] = useState<string>('Menor Preço');
@@ -61,7 +68,9 @@ const MenusMap: React.FC<IProps> = ({ data }: IProps) => {
   }, []);
 
   async function loadProducts(orden: string) {
-    const { data }: IProductRequest = await api.get(`/product`);
+    const { data }: IProductRequest = await api.get(
+      `/menu_product/${params.menu}/${params.product}`,
+    );
     handleTotalPages(data);
     handleOrder(data, orden);
   }
@@ -139,9 +148,9 @@ const MenusMap: React.FC<IProps> = ({ data }: IProps) => {
         {screen.width > 700 && <Sidebar />}
         <Body>
           <Title>
-            <span style={{ width: '300px' }}>
+            <span style={{ width: '350px' }}>
               <FaAngleDoubleRight className="iconTitle" />
-              Todos Produtos
+              {`${params.menu} - ${params.product}`}
             </span>
             <div>
               <span>

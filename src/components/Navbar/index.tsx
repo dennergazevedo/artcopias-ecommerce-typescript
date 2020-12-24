@@ -251,17 +251,17 @@ function LojaNavbar({ data, signed }: IProps) {
                     Empresarial
                   </div>
 
-                  <div onClick={() => handleRedirect('/all-products')}>
+                  <div onClick={() => handleRedirect('all-products')}>
                     <FaAngleRight className="icon" />
                     Todos Produtos
                   </div>
 
-                  <div onClick={() => handleRedirect('/budget')}>
+                  <div onClick={() => handleRedirect('budget')}>
                     <FaAngleRight className="icon" />
                     Solicitar Orçamento
                   </div>
 
-                  <div onClick={() => handleRedirect('/information')}>
+                  <div onClick={() => handleRedirect('information')}>
                     <FaAngleRight className="icon" />
                     Informações
                   </div>
@@ -320,12 +320,12 @@ function LojaNavbar({ data, signed }: IProps) {
                     <DropButton style={{ right: 30 }}>
                       <div>{data.email}</div>
 
-                      <div onClick={() => handleRedirect('/orders')}>
+                      <div onClick={() => handleRedirect('orders')}>
                         <FaRegCheckCircle className="icon" />
                         Meus Pedidos
                       </div>
 
-                      <div onClick={() => handleRedirect('/profile')}>
+                      <div onClick={() => handleRedirect('profile')}>
                         <FaUserAlt className="icon" />
                         Minha Conta
                       </div>
