@@ -2,8 +2,7 @@
 /** Action types */
 export enum MailTypes {
   MAIL_CONTACT_REQUEST = '@mail/MAIL_CONTACT_REQUEST',
-  MAIL_CONTACT_SUCCESS = '@mail/MAIL_CONTACT_SUCCESS',
-  MAIL_CONTACT_FAILURE = '@mail/MAIL_CONTACT_FAILURE',
+  MAIL_BUDGET_REQUEST = '@mail/MAIL_BUDGET_REQUEST',
 }
 
 /** Data types */
@@ -13,6 +12,15 @@ export interface IMail {
   phone: string;
   subject: string;
   message: string;
+}
+
+export interface IBudget {
+  name: string;
+  phone: string;
+  product: string;
+  message: string;
+  company: string;
+  email: string;
 }
 
 /** State types */

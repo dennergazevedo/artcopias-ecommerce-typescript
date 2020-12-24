@@ -13,7 +13,7 @@ import {
   resetPass,
   bePartner,
 } from './client/sagas';
-import { mailContactRequest } from './mail/sagas';
+import { mailContactRequest, mailBudgetRequest } from './mail/sagas';
 
 export default function* rootSaga() {
   return yield all([
@@ -28,5 +28,6 @@ export default function* rootSaga() {
     takeLatest<any>(ClientTypes.CLIENT_PARTNER, bePartner),
     // MAIL
     takeLatest<any>(MailTypes.MAIL_CONTACT_REQUEST, mailContactRequest),
+    takeLatest<any>(MailTypes.MAIL_BUDGET_REQUEST, mailBudgetRequest),
   ]);
 }

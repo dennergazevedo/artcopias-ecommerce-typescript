@@ -14,6 +14,7 @@ import DeliveryTime from '../views/DeliveryTime';
 import ResetPassword from '../views/ResetPassword';
 import WorkWithUs from '../views/WorkWithUs';
 import SendCurriculum from '../views/SendCurriculum';
+import Budget from '../views/Budget';
 
 import Register from '../views/Register';
 
@@ -36,6 +37,7 @@ const Routes: React.FC = () => (
     />
     <Route path="/work-with-us" exact component={WorkWithUs} />
     <Route path="/send-curriculum" exact component={SendCurriculum} />
+    <Route path="/budget" exact component={Budget} />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 

@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
-import { put, call } from 'redux-saga/effects';
+import { call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-
-/** ACTIONS */
-import { mailContactSuccess, mailContactFailure } from './actions';
 
 /** SERVICES */
 import api from '../../../services/api';
 
 /** TYPES */
-import { IMail } from './types';
+import { IMail, IBudget } from './types';
 
 /** Interfaces */
 interface IMailRequest {
@@ -18,7 +15,6 @@ interface IMailRequest {
 }
 
 export function* mailContactRequest({ data }: IMailRequest) {
-  console.log(data);
   try {
     yield call(api.post, 'contact_mail', {
       name: data.name,
@@ -28,7 +24,6 @@ export function* mailContactRequest({ data }: IMailRequest) {
       message: data.message,
     });
 
-    yield put(mailContactSuccess());
     toast.success('Contato efetuado com sucesso!', {
       position: 'bottom-center',
     });
@@ -36,6 +31,30 @@ export function* mailContactRequest({ data }: IMailRequest) {
     toast.error('Falha no cadastro, verifique seus dados', {
       position: 'bottom-center',
     });
-    yield put(mailContactFailure());
+  }
+}
+
+interface IMailBudget {
+  data: IBudget;
+}
+
+export function* mailBudgetRequest({ data }: IMailBudget) {
+  try {
+    yield call(api.post, 'send_budget', {
+      name: data.name,
+      phone: data.phone,
+      product: data.product,
+      message: data.message,
+      company: data.company,
+      email: data.email,
+    });
+
+    toast.success('Orçamento enviado com sucesso!', {
+      position: 'bottom-center',
+    });
+  } catch (err) {
+    toast.error('Falha ao enviar orçamento, tente novamente mais tarde.', {
+      position: 'bottom-center',
+    });
   }
 }
