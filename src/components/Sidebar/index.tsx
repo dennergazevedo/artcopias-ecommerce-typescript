@@ -106,7 +106,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Covid.map(covid => (
-                        <div className="divItem">
+                        <div className="divItem" key={covid}>
                             <span
                                 onClick={() => handleMenu("Covid", covid)}
                                 className="spanItem">
@@ -125,7 +125,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Adesivo.map(adesivo => (
-                        <div className="divItem">
+                        <div className="divItem" key={adesivo}>
                             <span
                                 onClick={() => handleMenu("Adesivos", adesivo)}
                                 className="spanItem">
@@ -144,7 +144,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Lona.map(lona => (
-                        <div className="divItem">
+                        <div className="divItem" key={lona}>
                             <span
                                 onClick={() => handleMenu("Lonas", lona)}
                                 className="spanItem">
@@ -163,7 +163,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Brinde.map(brinde => (
-                        <div className="divItem">
+                        <div className="divItem" key={brinde}>
                             <span
                                 onClick={() => handleMenu("Brinde", brinde)}
                                 className="spanItem">
@@ -182,7 +182,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Festa.map(festa => (
-                        <div className="divItem">
+                        <div className="divItem" key={festa}>
                             <span
                                 onClick={() => handleMenu("Festa", festa)}
                                 className="spanItem">
@@ -201,7 +201,7 @@ const Sidebar: React.FC = () => {
             <Item>
                 {
                     Empresarial.map(empresarial => (
-                        <div className="divItem">
+                        <div className="divItem" key={empresarial}>
                             <span
                                 onClick={() => handleMenu("Empresarial", empresarial)}
                                 className="spanItem">

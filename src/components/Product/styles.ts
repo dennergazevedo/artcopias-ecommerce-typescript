@@ -53,6 +53,8 @@ export const Nome = styled.span`
   color: #333;
   text-align: center;
   cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 export const Price = styled.div`

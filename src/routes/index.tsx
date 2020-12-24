@@ -15,6 +15,7 @@ import ResetPassword from '../views/ResetPassword';
 import WorkWithUs from '../views/WorkWithUs';
 import SendCurriculum from '../views/SendCurriculum';
 import Budget from '../views/Budget';
+import AllProducts from '../views/ProductMap/AllProducts';
 
 import Register from '../views/Register';
 
@@ -38,6 +39,7 @@ const Routes: React.FC = () => (
     <Route path="/work-with-us" exact component={WorkWithUs} />
     <Route path="/send-curriculum" exact component={SendCurriculum} />
     <Route path="/budget" exact component={Budget} />
+    <Route path="/all-products" exact component={AllProducts} />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 

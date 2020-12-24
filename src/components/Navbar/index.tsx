@@ -106,6 +106,12 @@ function LojaNavbar({ data, signed }: IProps) {
 
   function handleMenu(menu: string) {
     history.push(`/products_menu/${menu}`);
+    window.location.reload();
+  }
+
+  function handleRedirect(local: string) {
+    history.push(`/${local}`);
+    window.location.reload();
   }
 
   return (
@@ -245,17 +251,17 @@ function LojaNavbar({ data, signed }: IProps) {
                     Empresarial
                   </div>
 
-                  <div onClick={() => history.push('/all-products')}>
+                  <div onClick={() => handleRedirect('/all-products')}>
                     <FaAngleRight className="icon" />
                     Todos Produtos
                   </div>
 
-                  <div onClick={() => history.push('/budget')}>
+                  <div onClick={() => handleRedirect('/budget')}>
                     <FaAngleRight className="icon" />
                     Solicitar Orçamento
                   </div>
 
-                  <div onClick={() => history.push('/information')}>
+                  <div onClick={() => handleRedirect('/information')}>
                     <FaAngleRight className="icon" />
                     Informações
                   </div>
@@ -281,12 +287,12 @@ function LojaNavbar({ data, signed }: IProps) {
               Trabalhe Conosco
               {!work ? (
                 <DropButton>
-                  <div onClick={() => history.push('/work-with-us')}>
+                  <div onClick={() => handleRedirect('work-with-us')}>
                     <FaAngleRight className="icon" />
                     Seja um Parceiro
                   </div>
 
-                  <div onClick={() => history.push('/send-curriculum')}>
+                  <div onClick={() => handleRedirect('send-curriculum')}>
                     <FaAngleRight className="icon" />
                     Enviar Currículo Profissional
                   </div>
@@ -314,12 +320,12 @@ function LojaNavbar({ data, signed }: IProps) {
                     <DropButton style={{ right: 30 }}>
                       <div>{data.email}</div>
 
-                      <div onClick={() => history.push('/orders')}>
+                      <div onClick={() => handleRedirect('/orders')}>
                         <FaRegCheckCircle className="icon" />
                         Meus Pedidos
                       </div>
 
-                      <div onClick={() => history.push('/profile')}>
+                      <div onClick={() => handleRedirect('/profile')}>
                         <FaUserAlt className="icon" />
                         Minha Conta
                       </div>

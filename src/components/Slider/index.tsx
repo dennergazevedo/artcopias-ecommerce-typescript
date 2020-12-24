@@ -59,7 +59,7 @@ const Slideshow: React.FC = () => {
   const [slides, setSlides] = useState<ISlide[]>([]);
 
   async function loadSlideshow() {
-    const response = await api.get('SEM_ROTA');
+    const response = await api.get('/slideshow');
     setSlides(response.data);
   }
 
