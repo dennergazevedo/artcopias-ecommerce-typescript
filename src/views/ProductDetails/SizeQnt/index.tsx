@@ -107,7 +107,9 @@ const SizeQnt: React.FC<IProps> = ({
             <div>
               <span>
                 <FaArrowsAltV className="icon" />
-                {product && product.unit === 3 ? 'COMPRIMENTO' : 'ALTURA'}
+                {product && product.unit === 3
+                  ? 'COMPRIMENTO (cm)'
+                  : 'ALTURA (cm)'}
               </span>
               {product && (product.unit === 1 || product.unit === 4) ? (
                 <input disabled value="TAMANHO FIXO" />
@@ -117,13 +119,14 @@ const SizeQnt: React.FC<IProps> = ({
                   value={height}
                   onChange={e => setHeight(Number(e.target.value))}
                   type="number"
+                  min={product?.height}
                 />
               )}
             </div>
             <div>
               <span>
                 <FaArrowsAltH className="icon" />
-                LARGURA
+                LARGURA (cm)
               </span>
               {product && product.unit === 2 && (
                 <input
@@ -131,6 +134,7 @@ const SizeQnt: React.FC<IProps> = ({
                   value={width}
                   onChange={e => setWidth(Number(e.target.value))}
                   type="number"
+                  min={product?.width}
                 />
               )}
               {product && (product?.unit === 1 || product.unit === 4) && (
@@ -162,6 +166,11 @@ const SizeQnt: React.FC<IProps> = ({
               value={quantity}
               onChange={e => setQuantity(Number(e.target.value))}
               type="number"
+              min={
+                product?.unit === 1 || product?.unit === 4
+                  ? product.minvalue
+                  : 1
+              }
             />
             <FaArrowAltCircleRight className="icon" onClick={handleAddQnt} />
           </Quantidade>

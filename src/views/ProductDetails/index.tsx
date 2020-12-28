@@ -53,6 +53,7 @@ export interface IProduct {
   minvalue: number;
   minsize: number;
   width: number;
+  height: number;
   estoque: number;
   info: string;
   photo: string;
@@ -90,6 +91,8 @@ const ProductDetails: React.FC = () => {
   async function loadProduct() {
     const response = await api.get(`product/${params.id}`);
     setProduct(response.data);
+    if (response.data.width > 0) setWidth(response.data.width);
+    if (response.data.height > 0) setHeight(response.data.height);
     setLoading(false);
   }
 
