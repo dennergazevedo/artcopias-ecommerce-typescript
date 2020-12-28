@@ -13,7 +13,7 @@ import { Container, ModalBody, ModalTitle } from './styles';
 
 /** Interface */
 interface IProps {
-  setArt: (art: boolean) => {};
+  setArt: React.Dispatch<React.SetStateAction<boolean | null>>;
   toggle: () => void;
   modal: boolean;
   handleCloseModal: () => void;

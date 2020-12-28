@@ -13,6 +13,7 @@ import store from './store';
 /** Global Styles */
 import GlobalStyles from './styles/global';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App: React.FC = () => {
   return (

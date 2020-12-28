@@ -34,6 +34,12 @@ import {
 /** Lottie */
 import loadingLottie from '../../assets/json/loading.json';
 
+/** Components */
+import SizeQnt from './SizeQnt';
+import Arte from './Arte';
+import Acabamento from './Acabamento';
+import Info from './Info';
+
 /** Interfaces */
 interface IParams {
   id: string;
@@ -69,10 +75,17 @@ const ProductDetails: React.FC = () => {
 
   const [product, setProduct] = useState<IProduct | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [art, setArt] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
   const [valueFinishing, setValueFinishing] = useState<number>(0);
-  const [menu, setMenu] = useState<number>(0);
+
+  /** States */
+  const [width, setWidth] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [menu, setMenu] = useState<number>(1);
+  const [obs, setObs] = useState<string>('');
+  const [art, setArt] = useState<boolean | null>(false);
+  const [finishing, setFinishing] = useState<string>('');
 
   async function loadProduct() {
     const response = await api.get(`product/${params.id}`);
@@ -160,6 +173,38 @@ const ProductDetails: React.FC = () => {
               </BodyResumo>
             </Resumo>
           </Left>
+          <Right>
+            {menu === 1 && (
+              <SizeQnt
+                height={height}
+                product={product}
+                quantity={quantity}
+                setHeight={setHeight}
+                setMenu={setMenu}
+                setQuantity={setQuantity}
+                setWidth={setWidth}
+                width={width}
+              />
+            )}
+            {menu === 2 && (
+              <Arte
+                art={art}
+                obs={obs}
+                product={product}
+                setArt={setArt}
+                setMenu={setMenu}
+                setObs={setObs}
+              />
+            )}
+            {menu === 3 && (
+              <Acabamento
+                product={product}
+                setFinishing={setFinishing}
+                setMenu={setMenu}
+              />
+            )}
+            <Info product={product} />
+          </Right>
         </Container>
       )}
       <Footer />

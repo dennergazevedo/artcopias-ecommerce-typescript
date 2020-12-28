@@ -14,7 +14,7 @@ import { Container, ModalBody, ModalTitle } from './styles';
 
 /** Interfaces */
 interface IProps {
-  setArt: (art: boolean) => {};
+  setArt: React.Dispatch<React.SetStateAction<boolean | null>>;
   toggle: () => void;
   modal: boolean;
   handleCloseModal: () => void;
@@ -86,7 +86,12 @@ const ModalCreate: React.FC<IProps> = ({
           </span>
 
           <div>
-            <input type="checkbox" id="termos" onChange={handleConfirm} />
+            <input
+              type="checkbox"
+              id="termos"
+              onChange={handleConfirm}
+              style={{ marginTop: '5px' }}
+            />
             <label htmlFor="termos">Li e concordo com os termos acima.</label>
           </div>
         </ModalBody>

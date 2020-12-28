@@ -30,9 +30,9 @@ import {
 import { IProduct } from '../index';
 
 interface IProps {
-  setFinishing: (finishing: string) => {};
-  setMenu: (menu: number) => {};
-  product: IProduct;
+  setFinishing: React.Dispatch<React.SetStateAction<string>>;
+  setMenu: React.Dispatch<React.SetStateAction<number>>;
+  product: IProduct | undefined;
 }
 
 const Finishing: React.FC<IProps> = ({
@@ -109,7 +109,7 @@ const Finishing: React.FC<IProps> = ({
               </Popover>
             </div>
 
-            {product.finishing.indexOf('Corte Especial') !== -1 && (
+            {product && product.finishing.indexOf('Corte Especial') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -119,6 +119,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="corteesp"
                   onMouseEnter={() => setCorteesp(true)}
                   onMouseLeave={() => setCorteesp(false)}
                 >
@@ -137,7 +138,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Laminação') !== -1 && (
+            {product && product.finishing.indexOf('Laminação') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -147,6 +148,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="laminacao"
                   onMouseEnter={() => setLaminacao(true)}
                   onMouseLeave={() => setLaminacao(false)}
                 >
@@ -166,7 +168,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Resina') !== -1 && (
+            {product && product.finishing.indexOf('Resina') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -176,6 +178,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="resina"
                   onMouseEnter={() => setResina(true)}
                   onMouseLeave={() => setResina(false)}
                 >
@@ -191,7 +194,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Bastão') !== -1 && (
+            {product && product.finishing.indexOf('Bastão') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -201,6 +204,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="bastao"
                   onMouseEnter={() => setBastao(true)}
                   onMouseLeave={() => setBastao(false)}
                 >
@@ -216,7 +220,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Ilhós') !== -1 && (
+            {product && product.finishing.indexOf('Ilhós') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -226,6 +230,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="ilhos"
                   onMouseEnter={() => setIlhos(true)}
                   onMouseLeave={() => setIlhos(false)}
                 >
@@ -245,7 +250,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Calha') !== -1 && (
+            {product && product.finishing.indexOf('Calha') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -255,6 +260,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="calha"
                   onMouseEnter={() => setCalha(true)}
                   onMouseLeave={() => setCalha(false)}
                 >
@@ -273,7 +279,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Esqueleto') !== -1 && (
+            {product && product.finishing.indexOf('Esqueleto') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -283,6 +289,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="esqueleto"
                   onMouseEnter={() => setEsqueleto(true)}
                   onMouseLeave={() => setEsqueleto(false)}
                 >
@@ -305,7 +312,7 @@ const Finishing: React.FC<IProps> = ({
               </div>
             )}
 
-            {product.finishing.indexOf('Silk') !== -1 && (
+            {product && product.finishing.indexOf('Silk') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -315,6 +322,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="silk"
                   onMouseEnter={() => setSilk(true)}
                   onMouseLeave={() => setSilk(false)}
                 >
@@ -334,7 +342,7 @@ const Finishing: React.FC<IProps> = ({
                 </Popover>
               </div>
             )}
-            {product.finishing.indexOf('Transfer') !== -1 && (
+            {product && product.finishing.indexOf('Transfer') !== -1 && (
               <div>
                 <input
                   onChange={e => setFinishing(e.target.value)}
@@ -344,6 +352,7 @@ const Finishing: React.FC<IProps> = ({
                   type="radio"
                 />
                 <label
+                  htmlFor="transfer"
                   onMouseEnter={() => setTransfer(true)}
                   onMouseLeave={() => setTransfer(false)}
                 >

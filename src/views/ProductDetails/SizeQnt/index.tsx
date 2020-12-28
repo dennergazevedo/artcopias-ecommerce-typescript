@@ -33,14 +33,14 @@ import {
 import { IProduct } from '../index';
 
 interface IProps {
-  product: IProduct;
+  product: IProduct | undefined;
   quantity: number;
-  setQuantity: (quant: number | string) => {};
-  setMenu: (menu: number) => {};
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  setMenu: React.Dispatch<React.SetStateAction<number>>;
   height: number;
   width: number;
-  setHeight: (height: number | string) => {};
-  setWidth: (width: number | string) => {};
+  setHeight: React.Dispatch<React.SetStateAction<number>>;
+  setWidth: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SizeQnt: React.FC<IProps> = ({
@@ -65,6 +65,7 @@ const SizeQnt: React.FC<IProps> = ({
 
   function handleNext() {
     if (
+      product &&
       product?.minsize > width &&
       product?.minsize > height &&
       (product?.unit === 2 || product?.unit === 3)
@@ -106,15 +107,15 @@ const SizeQnt: React.FC<IProps> = ({
             <div>
               <span>
                 <FaArrowsAltV className="icon" />
-                {product.unit === 3 ? 'COMPRIMENTO' : 'ALTURA'}
+                {product && product.unit === 3 ? 'COMPRIMENTO' : 'ALTURA'}
               </span>
-              {product.unit === 1 || product.unit === 4 ? (
+              {product && (product.unit === 1 || product.unit === 4) ? (
                 <input disabled value="TAMANHO FIXO" />
               ) : (
                 <input
                   placeholder="Ex.: 100"
                   value={height}
-                  onChange={e => setHeight(e.target.value)}
+                  onChange={e => setHeight(Number(e.target.value))}
                   type="number"
                 />
               )}
@@ -124,19 +125,19 @@ const SizeQnt: React.FC<IProps> = ({
                 <FaArrowsAltH className="icon" />
                 LARGURA
               </span>
-              {product.unit === 2 && (
+              {product && product.unit === 2 && (
                 <input
                   placeholder="Ex.: 100"
                   value={width}
-                  onChange={e => setWidth(e.target.value)}
+                  onChange={e => setWidth(Number(e.target.value))}
                   type="number"
                 />
               )}
-              {(product?.unit === 1 || product.unit === 4) && (
+              {product && (product?.unit === 1 || product.unit === 4) && (
                 <input disabled value="TAMANHO FIXO" />
               )}
 
-              {product.unit === 3 && (
+              {product && product.unit === 3 && (
                 <input disabled value={`FIXA: ${product.width}`} />
               )}
             </div>
@@ -159,7 +160,7 @@ const SizeQnt: React.FC<IProps> = ({
             <input
               placeholder="Ex.: 100"
               value={quantity}
-              onChange={e => setQuantity(e.target.value)}
+              onChange={e => setQuantity(Number(e.target.value))}
               type="number"
             />
             <FaArrowAltCircleRight className="icon" onClick={handleAddQnt} />

@@ -36,12 +36,12 @@ import ModalSend from './ModalSend';
 import { IProduct } from '../index';
 
 interface IProps {
-  setArt: (art: boolean | null) => {};
-  art: boolean;
-  setMenu: (menu: number) => {};
-  product: IProduct;
+  setArt: React.Dispatch<React.SetStateAction<boolean | null>>;
+  art: boolean | null;
+  setMenu: React.Dispatch<React.SetStateAction<number>>;
+  product: IProduct | undefined;
   obs: string;
-  setObs: (obs: string) => {};
+  setObs: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ArteAcab: React.FC<IProps> = ({
@@ -127,7 +127,7 @@ const ArteAcab: React.FC<IProps> = ({
           <SubTitleSize>
             <span>ESCOLHA A MELHOR OPÇÃO PARA SEU PEDIDO.</span>
           </SubTitleSize>
-          {product.unit !== 4 ? (
+          {product && product.unit !== 4 ? (
             <ArteCreate>
               <div>
                 <input
