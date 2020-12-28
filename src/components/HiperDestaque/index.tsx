@@ -50,12 +50,11 @@ const Destaque: React.FC = () => {
     const response = await api.get(`search_star`);
     const array = [];
     for (let i = 0; i < response.data.length; i++) {
-      const foto = await api.get(`file/${response.data[i].photo}`);
       const item = {
         name: response.data[i].name,
         info: response.data[i].info,
         cod: response.data[i].id,
-        photo: foto.data.url,
+        photo: response.data[i].photo,
       };
       array.push(item);
     }
@@ -85,7 +84,7 @@ const Destaque: React.FC = () => {
   return (
     <Carousel {...handlers} style={{ cursor: 'grab' }}>
       {products.map(item => (
-        <Container sliding={sliding}>
+        <Container sliding={sliding} key={item.name}>
           <Body>
             <ItemDescribe>
               <Title>{item.name}</Title>
@@ -102,7 +101,7 @@ const Destaque: React.FC = () => {
           </Body>
         </Container>
       ))}
-      {products.length >= 1 && (
+      {products.length > 1 && (
         <>
           <ButtonNext>
             <IoIosArrowForward onClick={handleNext} className="icon" />

@@ -35,19 +35,10 @@ interface IProduct {
 
 function Product({ product, profile }: IProps) {
   const [mouseEnter, setMouseEnter] = useState(false);
-  const [url, setUrl] = useState('');
-
-  async function loadPhoto() {
-    const { data } = await api.get(`file/${product.photo}`);
-    setUrl(data.url);
-  }
-
-  useEffect(() => {
-    loadPhoto();
-  }, []);
 
   const handleDetails = () => {
     history.push(`/product-details/${product.id}`);
+    window.location.reload();
   };
 
   return (
@@ -59,11 +50,11 @@ function Product({ product, profile }: IProps) {
       >
         {mouseEnter ? (
           <>
-            <img src={url} alt="PRODUTO" className="imgOn" />
+            <img src={product.photo} alt="PRODUTO" className="imgOn" />
             <img src={circle} alt="FUNDO" className="circle" />
           </>
         ) : (
-          <img src={url} alt="PRODUTO" className="imgOff" />
+          <img src={product.photo} alt="PRODUTO" className="imgOff" />
         )}
       </ImgDiv>
 
@@ -74,9 +65,9 @@ function Product({ product, profile }: IProps) {
 
         {Number(profile.provider) ===
         Number(process.env.REACT_APP_PROVIDER_DEALER) ? (
-          <span>{product.provider_value.toFixed(2)}</span>
+          <span>{Number(product.provider_value).toFixed(2)}</span>
         ) : (
-          <span>{product.value.toFixed(2)}</span>
+          <span>{Number(product.value).toFixed(2)}</span>
         )}
       </Price>
 
