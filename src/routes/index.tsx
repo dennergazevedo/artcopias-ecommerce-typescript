@@ -20,6 +20,7 @@ import MenuProduct from '../views/ProductMap/MenuProduct';
 import SearchProduct from '../views/ProductMap/SearchProduct';
 import SearchMenu from '../views/ProductMap/SearchMenu';
 import ProductDetails from '../views/ProductDetails';
+import Cart from '../views/Cart';
 
 import Register from '../views/Register';
 
@@ -48,6 +49,8 @@ const Routes: React.FC = () => (
     <Route path="/search-product/:name" exact component={SearchProduct} />
     <Route path="/search-bymenu/:menu" exact component={SearchMenu} />
     <Route path="/product-details/:id" exact component={ProductDetails} />
+
+    <Route path="/cart" exact component={Cart} isPrivate />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 

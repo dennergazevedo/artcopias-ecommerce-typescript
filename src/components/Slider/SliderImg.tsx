@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 
 // STYLED COMPONENTS
-import { Container } from './styles';
+import { Imagem } from './styles';
 
 /** Interface */
 interface IProps {
@@ -38,9 +38,7 @@ const SliderImg: React.FC<IProps> = ({ slideshow }: IProps) => {
   }, []);
 
   return (
-    <Container>
-      <img src={src} alt={`${slideshow.describe}`} onClick={handleRedirect} />
-    </Container>
+    <Imagem src={src} alt={`${slideshow.describe}`} onClick={handleRedirect} />
   );
 };
 

@@ -5,6 +5,7 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { AuthTypes } from './auth/types';
 import { ClientTypes } from './client/types';
 import { MailTypes } from './mail/types';
+import { CartTypes } from './cart/types';
 
 import { authRequest, authRequestByRegister, signOut } from './auth/sagas';
 import {
@@ -14,6 +15,7 @@ import {
   bePartner,
 } from './client/sagas';
 import { mailContactRequest, mailBudgetRequest } from './mail/sagas';
+import { addCart, removeCart } from './cart/sagas';
 
 export default function* rootSaga() {
   return yield all([
@@ -29,5 +31,8 @@ export default function* rootSaga() {
     // MAIL
     takeLatest<any>(MailTypes.MAIL_CONTACT_REQUEST, mailContactRequest),
     takeLatest<any>(MailTypes.MAIL_BUDGET_REQUEST, mailBudgetRequest),
+    // CART
+    takeLatest<any>(CartTypes.CART_ADD, addCart),
+    takeLatest<any>(CartTypes.CART_REMOVE, removeCart),
   ]);
 }

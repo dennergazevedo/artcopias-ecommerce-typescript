@@ -7,6 +7,7 @@ const INITIAL_STATE: IAuthState = {
     token: '',
     name: '',
     provider: 0,
+    address_id: null,
   },
   error: false,
   loading: false,
@@ -31,7 +32,7 @@ const reducer: Reducer<IAuthState> = (state = INITIAL_STATE, action) => {
         loading: false,
         error: true,
         signed: false,
-        data: { email: '', token: '', name: '', provider: 0 },
+        data: { email: '', token: '', name: '', provider: 0, address_id: null },
       };
     case AuthTypes.AUTH_LOGOUT:
       return {
@@ -39,7 +40,7 @@ const reducer: Reducer<IAuthState> = (state = INITIAL_STATE, action) => {
         loading: false,
         error: false,
         signed: false,
-        data: { email: '', token: '', name: '', provider: 0 },
+        data: { email: '', token: '', name: '', provider: 0, address_id: null },
       };
     default:
       return state;

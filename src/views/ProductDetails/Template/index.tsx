@@ -67,7 +67,7 @@ const ArtDownload: React.FC<IProps> = ({ template, signed }: IProps) => {
           `${process.env.REACT_APP_API_URL}download_open/${template}`,
         );
         await api.put(`download_auth/${resp.data.url}`, {
-          auth: null,
+          auth: 0,
         });
         setLoading(false);
         api.delete(`delete_file/${resp.data.url}`);

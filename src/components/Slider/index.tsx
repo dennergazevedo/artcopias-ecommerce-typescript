@@ -7,6 +7,7 @@ import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 
 /** Services */
 import { Fade } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
 import api from '../../services/api';
 
 /** Components */
@@ -35,7 +36,7 @@ const Slideshow: React.FC = () => {
           padding: '5px',
           backgroundColor: '#0005',
           position: 'absolute',
-          zIndex: '-moz-initial',
+          zIndex: 10,
           cursor: 'pointer',
         }}
       />
@@ -48,7 +49,7 @@ const Slideshow: React.FC = () => {
           padding: '5px',
           backgroundColor: '#0005',
           position: 'absolute',
-          zIndex: '-moz-initial',
+          zIndex: 10,
           cursor: 'pointer',
           right: 0,
         }}
@@ -72,7 +73,7 @@ const Slideshow: React.FC = () => {
       {slides.length > 0 && (
         <Fade {...fadeProperties}>
           {slides.map(item => (
-            <div>
+            <div key={item.describe}>
               <SliderImg slideshow={item} />
             </div>
           ))}

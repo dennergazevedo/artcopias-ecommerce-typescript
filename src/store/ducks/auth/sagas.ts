@@ -41,6 +41,7 @@ export function* authRequest({ data }: IData) {
         name: session.user.name,
         token: session.token,
         provider: session.user.provider,
+        address_id: session.user.address_id,
       }),
     );
 
@@ -77,6 +78,7 @@ export function* authRequestByRegister({ payload }: IPayload) {
         name: session.user.name,
         token: session.token,
         provider: session.user.provider,
+        address_id: session.user.address_id,
       }),
     );
     toast.success('Logado com sucesso! Redirecionando...', {

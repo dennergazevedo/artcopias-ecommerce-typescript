@@ -33,12 +33,14 @@ interface IProps {
   setFinishing: React.Dispatch<React.SetStateAction<string>>;
   setMenu: React.Dispatch<React.SetStateAction<number>>;
   product: IProduct | undefined;
+  handleAddCart: () => void;
 }
 
 const Finishing: React.FC<IProps> = ({
   setFinishing,
   setMenu,
   product,
+  handleAddCart,
 }: IProps) => {
   const [noacab, setNoacab] = useState(false);
   const [corteesp, setCorteesp] = useState(false);
@@ -54,7 +56,7 @@ const Finishing: React.FC<IProps> = ({
   useEffect(() => {
     const element = document.getElementById('noacab') as HTMLInputElement;
     element.checked = true;
-    setFinishing('SEM ACABAMENTO');
+    setFinishing('Sem Acabamento');
   }, []);
 
   function handleBack() {
@@ -372,7 +374,7 @@ const Finishing: React.FC<IProps> = ({
         </Size>
 
         <Size>
-          <Next>
+          <Next onClick={handleAddCart}>
             <FaCartPlus className="icon" />
             ADICIONAR AO CARRINHO
           </Next>
