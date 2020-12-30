@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react';
 /** Icons */
 import {
   FaCartPlus,
-  FaCheck,
+  FaCheckCircle,
   FaTruck,
   FaDonate,
   FaTimes,
@@ -251,6 +251,8 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
             position: 'bottom-center',
           });
         }
+      } else {
+        toast.error('Número é obrigatório!', { position: 'bottom-center' });
       }
     }
   }
@@ -267,7 +269,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
             <span>Endereço de entrega</span>
           </Title>
           <Subtitle>
-            <FaCheck className="iconSubtitle" />
+            <FaCheckCircle className="iconSubtitle" />
             <span>ENTREGAMOS EM TODO O BRASIL</span>
           </Subtitle>
           <Body>
@@ -369,7 +371,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
             <span>Produtos adicionados ao carrinho</span>
           </Title>
           <Subtitle>
-            <FaCheck className="iconSubtitle" />
+            <FaCheckCircle className="iconSubtitle" />
             <span>LISTAGEM DE PRODUTOS</span>
           </Subtitle>
           <BodyCart>
@@ -394,7 +396,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
             <span>Financeiro</span>
           </Title>
           <Subtitle>
-            <FaCheck className="iconSubtitle" />
+            <FaCheckCircle className="iconSubtitle" />
             <span>CONTROLE DO PEDIDO</span>
           </Subtitle>
           <BodyCart>
@@ -414,7 +416,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
             </ItemFinance>
             <ItemFinance>
               <ButtonFinish type="button" onClick={createServiceOrder}>
-                <FaCheck className="icon" />
+                <FaCheckCircle className="icon" />
                 <span>{loading ? 'CARREGANDO...' : 'FINALIZAR PEDIDO'}</span>
               </ButtonFinish>
               <BackShop onClick={handleShop}>CONTINUAR COMPRANDO</BackShop>
