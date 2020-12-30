@@ -111,17 +111,19 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
 
   async function loadData() {
     try {
-      const response: IAddressRequest = await api.get(
-        `address/${data.address_id}`,
-      );
-      setAddress(response.data);
+      if (data.address_id) {
+        const response: IAddressRequest = await api.get(
+          `address/${data.address_id}`,
+        );
+        setAddress(response.data);
 
-      let value = 0;
-      for (let i = 0; i < cart.length; i++) {
-        const resp = await api.get(`order/${cart[i]}`);
-        value += Number(resp.data.value);
+        let value = 0;
+        for (let i = 0; i < cart.length; i++) {
+          const resp = await api.get(`order/${cart[i]}`);
+          value += Number(resp.data.value);
+        }
+        setTotal(value);
       }
-      setTotal(value);
     } catch (err) {
       loadData();
     }
@@ -156,7 +158,25 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
           client_id: cli.data.id,
           address_id: address?.id,
         });
-        updateOrders(response.data.id);
+        let stock = true;
+        for (let i = 0; i < cart.length; i++) {
+          const order = await api.get(`order/${cart[i]}`);
+          const product = await api.get(`product/${order.data.product_id}`);
+          if (
+            product.data.stock !== -1 &&
+            product.data.stock < order.data.quantity
+          ) {
+            stock = false;
+            toast.error(
+              `O produto ${product.data.name} não possui estoque disponível.`,
+              { position: 'bottom-center' },
+            );
+            await api.delete(`serviceorder/${response.data.id}`);
+            setLoading(false);
+            break;
+          }
+        }
+        if (stock) updateOrders(response.data.id);
       } catch (err) {
         toast.error('Falha ao finalizar pedido, tente novamente mais tarde', {
           position: 'bottom-center',
@@ -252,94 +272,94 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
           </Subtitle>
           <Body>
             {address ? (
-              <>
-                <Address>
-                  <div className="title">
-                    <span>{address.street}</span>
-                    <span className="editButton" onClick={toggle}>
-                      EDITAR ENDEREÇO
-                    </span>
-                  </div>
-                  <span>{`CEP ${address.zipcode},`}</span>
-                  <span>{`Número ${address.number},`}</span>
-                  <span>{`${address.neighborhood} - ${address.state}`}</span>
-                </Address>
-                <Modal isToggled={modalAddress}>
-                  <BodyModal>
-                    <TitleModal>
-                      <span>EDITAR ENDEREÇO</span>
-                      <FaTimes className="iconTitle" onClick={toggle} />
-                    </TitleModal>
-                    <Divider />
-                    <Edit>
-                      <ItemEdit>
-                        <div>
-                          <span>CEP</span>
-                          <InputMask
-                            mask="99.999-999"
-                            onChange={e => setZipcode(e.target.value)}
-                            value={zipcode}
-                            placeholder="Ex: 35.930-004"
-                          />
-                        </div>
-                        <div>
-                          <span>Número</span>
-                          <input
-                            placeholder="Ex: 100"
-                            value={number}
-                            onChange={e => setNumber(Number(e.target.value))}
-                          />
-                        </div>
-                        <div>
-                          <span>Rua</span>
-                          <input
-                            placeholder="Ex: Av. Getúlio Vargas"
-                            value={street}
-                            onChange={e => setStreet(e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <span>Bairro</span>
-                          <input
-                            placeholder="Ex: Carneirinhos"
-                            value={neighborhood}
-                            onChange={e => setNeighborhood(e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <span>Cidade</span>
-                          <input
-                            placeholder="Ex: João Monlevade"
-                            value={city}
-                            onChange={e => setCity(e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <span>Estado</span>
-                          <input
-                            placeholder="Ex: MG"
-                            value={state}
-                            onChange={e => setState(e.target.value)}
-                          />
-                        </div>
-                      </ItemEdit>
-                      <Confirm onClick={handleConfirmAddress}>
-                        <FaSave className="icon" />
-                        <span>SALVAR</span>
-                      </Confirm>
-                    </Edit>
-                  </BodyModal>
-                </Modal>
-              </>
-            ) : (
               <Address>
-                <span className="register">CADASTRAR ENDEREÇO</span>
+                <div className="title">
+                  <span>{address.street}</span>
+                  <span className="editButton" onClick={toggle}>
+                    EDITAR ENDEREÇO
+                  </span>
+                </div>
+                <span>{`CEP ${address.zipcode},`}</span>
+                <span>{`Número ${address.number},`}</span>
+                <span>{`${address.neighborhood} - ${address.state}`}</span>
+              </Address>
+            ) : (
+              <Address onClick={toggle}>
+                <span className="register" onClick={toggle}>
+                  CADASTRAR ENDEREÇO
+                </span>
               </Address>
             )}
             <span className="alert">
               <b>ATENÇÃO</b>: Alguns pedidos podem sofrer alterações na data de
               entrega, caso ocorra será avisado com antecedência.
             </span>
+            <Modal isToggled={modalAddress}>
+              <BodyModal>
+                <TitleModal>
+                  <span>EDITAR ENDEREÇO</span>
+                  <FaTimes className="iconTitle" onClick={toggle} />
+                </TitleModal>
+                <Divider />
+                <Edit>
+                  <ItemEdit>
+                    <div>
+                      <span>CEP</span>
+                      <InputMask
+                        mask="99.999-999"
+                        onChange={e => setZipcode(e.target.value)}
+                        value={zipcode}
+                        placeholder="Ex: 35.930-004"
+                      />
+                    </div>
+                    <div>
+                      <span>Número</span>
+                      <input
+                        placeholder="Ex: 100"
+                        value={number}
+                        onChange={e => setNumber(Number(e.target.value))}
+                      />
+                    </div>
+                    <div>
+                      <span>Rua</span>
+                      <input
+                        placeholder="Ex: Av. Getúlio Vargas"
+                        value={street}
+                        onChange={e => setStreet(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <span>Bairro</span>
+                      <input
+                        placeholder="Ex: Carneirinhos"
+                        value={neighborhood}
+                        onChange={e => setNeighborhood(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <span>Cidade</span>
+                      <input
+                        placeholder="Ex: João Monlevade"
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <span>Estado</span>
+                      <input
+                        placeholder="Ex: MG"
+                        value={state}
+                        onChange={e => setState(e.target.value)}
+                      />
+                    </div>
+                  </ItemEdit>
+                  <Confirm onClick={handleConfirmAddress}>
+                    <FaSave className="icon" />
+                    <span>SALVAR</span>
+                  </Confirm>
+                </Edit>
+              </BodyModal>
+            </Modal>
           </Body>
         </ItemBody>
 

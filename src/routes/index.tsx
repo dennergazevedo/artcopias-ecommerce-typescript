@@ -53,7 +53,7 @@ const Routes: React.FC = () => (
     <Route path="/product-details/:id" exact component={ProductDetails} />
 
     <Route path="/cart" exact component={Cart} isPrivate />
-    <Route path="/checkout" exact component={Checkout} isPrivate />
+    <Route path="/checkout/:id" exact component={Checkout} isPrivate />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 
