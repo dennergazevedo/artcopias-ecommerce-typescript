@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-alert */
@@ -7,22 +9,33 @@
 import React, { useState, useEffect } from 'react';
 
 /** Icons */
-import { FaCartPlus, FaCheck, FaTruck, FaDonate } from 'react-icons/fa';
+import {
+  FaCartPlus,
+  FaCheck,
+  FaTruck,
+  FaDonate,
+  FaTimes,
+  FaSave,
+} from 'react-icons/fa';
 
-/** Lottie */
+/** Util */
 import Lottie from 'react-lottie';
 import { toast } from 'react-toastify';
+import cepPromise from 'cep-promise';
+import InputMask from 'react-input-mask';
 
 /** Redux */
 import { connect } from 'react-redux';
 import store, { IApplicationState } from '../../store';
 import { IAuth } from '../../store/ducks/auth/types';
+import { CartTypes } from '../../store/ducks/cart/types';
 
 /** Components */
 import LojaNavbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Slider from '../../components/Slider';
 import MandeUmZap from '../../components/ZapPlugin';
+import Modal from '../../components/Modal';
 import Product from './Product';
 
 /** Services */
@@ -45,8 +58,13 @@ import {
   ItemFinance,
   ButtonFinish,
   BackShop,
+  BodyModal,
+  TitleModal,
+  Divider,
+  Edit,
+  ItemEdit,
+  Confirm,
 } from './styles';
-import { CartTypes } from '../../store/ducks/cart/types';
 
 /** Interfaces */
 interface IProps {
@@ -81,6 +99,15 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [address, setAddress] = useState<IAddress>();
   const [total, setTotal] = useState<number>();
+  const [modalAddress, setModalAddress] = useState<boolean>(false);
+  const [zipcode, setZipcode] = useState<string>('');
+  const [number, setNumber] = useState<number>();
+  const [state, setState] = useState<string>('');
+  const [neighborhood, setNeighborhood] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [street, setStreet] = useState<string>('');
+
+  const toggle = () => setModalAddress(!modalAddress);
 
   async function loadData() {
     try {
@@ -127,6 +154,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
           describe: '[PEDIDO EFETUADO PELO SITE]',
           value: total,
           client_id: cli.data.id,
+          address_id: address?.id,
         });
         updateOrders(response.data.id);
       } catch (err) {
@@ -163,6 +191,50 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
     }
   }
 
+  async function handleCep() {
+    let numCep: string = zipcode;
+    numCep = numCep.replace('.', '');
+    numCep = numCep.replace('-', '');
+    numCep = numCep.replace('_', '');
+    if (numCep.length === 8) {
+      const aux = await cepPromise(zipcode);
+      setStreet(aux.street);
+      setNeighborhood(aux.neighborhood);
+      setState(aux.state);
+      setCity(aux.city);
+    }
+  }
+
+  useEffect(() => {
+    handleCep();
+  }, [zipcode]);
+
+  async function handleConfirmAddress() {
+    if (window.confirm('Salvar endereço de entrega?')) {
+      if (zipcode !== '' && number) {
+        try {
+          const addressResponse: IAddressRequest = await api.post('address', {
+            zipcode,
+            state,
+            city,
+            neighborhood,
+            street,
+            number,
+          });
+          setAddress(addressResponse.data);
+          toast.success('Endereço salvo com sucesso!', {
+            position: 'bottom-center',
+          });
+          toggle();
+        } catch (err) {
+          toast.error('Falha ao atualizar endereço!', {
+            position: 'bottom-center',
+          });
+        }
+      }
+    }
+  }
+
   return (
     <>
       <LojaNavbar />
@@ -180,15 +252,85 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
           </Subtitle>
           <Body>
             {address ? (
-              <Address>
-                <div className="title">
-                  <span>{address.street}</span>
-                  <span className="editButton">EDITAR ENDEREÇO</span>
-                </div>
-                <span>{`CEP ${address.zipcode},`}</span>
-                <span>{`Número ${address.number},`}</span>
-                <span>{`${address.neighborhood} - ${address.state}`}</span>
-              </Address>
+              <>
+                <Address>
+                  <div className="title">
+                    <span>{address.street}</span>
+                    <span className="editButton" onClick={toggle}>
+                      EDITAR ENDEREÇO
+                    </span>
+                  </div>
+                  <span>{`CEP ${address.zipcode},`}</span>
+                  <span>{`Número ${address.number},`}</span>
+                  <span>{`${address.neighborhood} - ${address.state}`}</span>
+                </Address>
+                <Modal isToggled={modalAddress}>
+                  <BodyModal>
+                    <TitleModal>
+                      <span>EDITAR ENDEREÇO</span>
+                      <FaTimes className="iconTitle" onClick={toggle} />
+                    </TitleModal>
+                    <Divider />
+                    <Edit>
+                      <ItemEdit>
+                        <div>
+                          <span>CEP</span>
+                          <InputMask
+                            mask="99.999-999"
+                            onChange={e => setZipcode(e.target.value)}
+                            value={zipcode}
+                            placeholder="Ex: 35.930-004"
+                          />
+                        </div>
+                        <div>
+                          <span>Número</span>
+                          <input
+                            placeholder="Ex: 100"
+                            value={number}
+                            onChange={e => setNumber(Number(e.target.value))}
+                          />
+                        </div>
+                        <div>
+                          <span>Rua</span>
+                          <input
+                            placeholder="Ex: Av. Getúlio Vargas"
+                            value={street}
+                            onChange={e => setStreet(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <span>Bairro</span>
+                          <input
+                            placeholder="Ex: Carneirinhos"
+                            value={neighborhood}
+                            onChange={e => setNeighborhood(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <span>Cidade</span>
+                          <input
+                            placeholder="Ex: João Monlevade"
+                            value={city}
+                            onChange={e => setCity(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <span>Estado</span>
+                          <input
+                            placeholder="Ex: MG"
+                            value={state}
+                            onChange={e => setState(e.target.value)}
+                          />
+                        </div>
+                      </ItemEdit>
+                      <Confirm onClick={handleConfirmAddress}>
+                        <FaSave className="icon" />
+                        <span>SALVAR</span>
+                      </Confirm>
+                    </Edit>
+                  </BodyModal>
+                </Modal>
+              </>
             ) : (
               <Address>
                 <span className="register">CADASTRAR ENDEREÇO</span>

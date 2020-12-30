@@ -86,8 +86,7 @@ const Finishing: React.FC<IProps> = ({
           <Acabamentos>
             <div>
               <input
-                onChange={e => setFinishing(e.target.value)}
-                value="SEM ACABAMENTO"
+                onChange={() => setFinishing('Sem Acabamento')}
                 name="acabamento"
                 id="noacab"
                 type="radio"
@@ -114,8 +113,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Corte Especial') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Corte Especial"
+                  onChange={() => setFinishing('Corte Especial')}
                   name="acabamento"
                   id="corteesp"
                   type="radio"
@@ -143,8 +141,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Laminação') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Laminação"
+                  onChange={() => setFinishing('Laminação')}
                   name="acabamento"
                   id="laminacao"
                   type="radio"
@@ -173,8 +170,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Resina') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Resina"
+                  onChange={() => setFinishing('Resina')}
                   name="acabamento"
                   id="resina"
                   type="radio"
@@ -199,8 +195,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Bastão') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Bastão"
+                  onChange={() => setFinishing('Bastão')}
                   name="acabamento"
                   id="bastao"
                   type="radio"
@@ -225,8 +220,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Ilhós') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="ILHÓS"
+                  onChange={() => setFinishing('Ilhós')}
                   name="acabamento"
                   id="ilhos"
                   type="radio"
@@ -255,8 +249,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Calha') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Calha"
+                  onChange={() => setFinishing('Calha')}
                   name="acabamento"
                   id="calha"
                   type="radio"
@@ -284,8 +277,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Esqueleto') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="ESQUELETO"
+                  onChange={() => setFinishing('Esqueleto')}
                   name="acabamento"
                   id="esqueleto"
                   type="radio"
@@ -317,8 +309,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Silk') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="Silk"
+                  onChange={() => setFinishing('Silk')}
                   name="acabamento"
                   id="silk"
                   type="radio"
@@ -347,8 +338,7 @@ const Finishing: React.FC<IProps> = ({
             {product && product.finishing.indexOf('Transfer') !== -1 && (
               <div>
                 <input
-                  onChange={e => setFinishing(e.target.value)}
-                  value="TRANSFER"
+                  onChange={() => setFinishing('Transfer')}
                   name="acabamento"
                   id="transfer"
                   type="radio"

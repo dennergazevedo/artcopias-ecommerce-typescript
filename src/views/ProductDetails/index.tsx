@@ -224,39 +224,47 @@ const ProductDetails: React.FC<IProps> = ({ data, signed }: IProps) => {
     } else if (finishing === 'Corte Especial') {
       if (product?.unit === 2) {
         const m2 = (width / 100) * (height / 100);
-        setValueFinishing(m2 * 40 * quantity);
+        const tot = m2 * 40 * quantity;
+        setValueFinishing(tot);
       } else if (product?.unit === 3) {
         const m2 = (product?.height / 100) * (width / 100);
-        setValueFinishing(m2 * 40 * quantity);
+        const tot = m2 * 40 * quantity;
+        setValueFinishing(tot);
       } else {
         setValueFinishing(0);
       }
     } else if (finishing === 'Laminação') {
       if (product?.unit === 2) {
         const m2 = (width / 100) * (height / 100);
-        setValueFinishing(m2 * 40 * quantity);
+        const tot = m2 * 40 * quantity;
+        setValueFinishing(tot);
       } else if (product?.unit === 3) {
         const m2 = (product.height / 100) * (width / 100);
-        setValueFinishing(m2 * 40 * quantity);
+        const tot = m2 * 40 * quantity;
+        setValueFinishing(tot);
       } else {
         setValueFinishing(0);
       }
     } else if (finishing === 'Resina') {
       if (product?.unit === 2) {
         const m2 = (width / 100) * (height / 100);
-        setValueFinishing(m2 * 200 * quantity);
+        const tot = m2 * 200 * quantity;
+        setValueFinishing(tot);
       } else if (product?.unit === 3) {
         const m2 = (product.height / 100) * (width / 100);
-        setValueFinishing(m2 * 200 * quantity);
+        const tot = m2 * 200 * quantity;
+        setValueFinishing(tot);
+      } else {
+        setValueFinishing(0);
       }
-      setValueFinishing(0);
     } else if (finishing === 'Bastão') {
       if (product?.unit === 2 || product?.unit === 3) {
         let mult = width;
         if (mult < height) {
           mult = height;
         }
-        setValueFinishing((mult / 100) * 8 * quantity);
+        const tot = (Number(mult) / 100) * 8 * quantity;
+        setValueFinishing(tot);
       } else {
         setValueFinishing(0);
       }
@@ -266,18 +274,22 @@ const ProductDetails: React.FC<IProps> = ({ data, signed }: IProps) => {
       let alt = height / 20;
       alt += 1;
       const n = lat * 2 + alt * 2;
-      setValueFinishing(n * 0.5 * quantity);
+      const tot = n * 0.5 * quantity;
+      setValueFinishing(tot);
     } else if (finishing === 'Calha') {
       const larg = (width / 100) * 2 * 60;
       const alt = (height / 100) * 2 * 60;
-      setValueFinishing((larg + alt) * quantity);
+      const tot = (larg + alt) * quantity;
+      setValueFinishing(tot);
     } else if (finishing === 'Esqueleto') {
       if (product?.unit === 2) {
         const m2 = (width / 100) * (height / 100);
-        setValueFinishing(m2 * 50 * quantity);
+        const tot = m2 * 50 * quantity;
+        setValueFinishing(tot);
       } else if (product?.unit === 3) {
         const m2 = (product.height / 100) * (width / 100);
-        setValueFinishing(m2 * 50 * quantity);
+        const tot = m2 * 50 * quantity;
+        setValueFinishing(tot);
       } else {
         setValueFinishing(0);
       }

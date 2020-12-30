@@ -194,3 +194,96 @@ export const BackShop = styled.span`
     color: #333;
   }
 `;
+
+export const BodyModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  margin-top: 50px;
+  width: 50vw;
+  min-width: 300px;
+  box-shadow: 1px 1px 5px #3335;
+`;
+
+export const TitleModal = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .iconTitle {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 600;
+  }
+`;
+
+export const Divider = styled.hr`
+  width: 100%;
+  border-bottom: 1px solid #3333;
+`;
+
+export const Edit = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+`;
+
+export const ItemEdit = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-top: 10px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 12px;
+    margin-top: 10px;
+
+    input {
+      border: 1px solid #3335;
+      border-radius: 5px;
+      font-size: 12px;
+      padding: 5px 5px 5px 10px;
+      width: 200px;
+    }
+  }
+`;
+
+export const Confirm = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 20px;
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  align-self: flex-end;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #111;
+  }
+
+  .icon {
+    font-size: 14px;
+    margin-right: 5px;
+  }
+`;
