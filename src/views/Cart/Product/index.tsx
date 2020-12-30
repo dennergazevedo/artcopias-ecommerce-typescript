@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable func-names */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
@@ -95,12 +96,16 @@ const Product: React.FC<IProps> = ({ item }: IProps) => {
   }
 
   function handleRemove() {
-    store.store.dispatch({
-      type: CartTypes.CART_REMOVE,
-      data: {
-        id: order?.id,
-      },
-    });
+    if (
+      window.confirm('Tem certeza que deseja excluir este produto do pedido?')
+    ) {
+      store.store.dispatch({
+        type: CartTypes.CART_REMOVE,
+        data: {
+          id: order?.id,
+        },
+      });
+    }
   }
 
   return (

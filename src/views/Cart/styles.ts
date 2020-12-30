@@ -139,3 +139,58 @@ export const Address = styled.div`
     }
   }
 `;
+
+export const ItemFinance = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      width: 150px;
+      height: auto;
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 500;
+      background-color: #9995;
+      margin: 3px;
+    }
+  }
+`;
+
+export const ButtonFinish = styled.button`
+  background-color: #333;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 5px;
+  transition: 0.5s all;
+  font-size: 12px;
+
+  .icon {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    transition: 0.5s all;
+    background-color: #111;
+  }
+`;
+
+export const BackShop = styled.span`
+  cursor: pointer;
+  font-size: 14px;
+  color: #999;
+  transition: 0.5s all;
+  margin-top: 10px;
+
+  &:hover {
+    transition: 0.5s all;
+    color: #333;
+  }
+`;
