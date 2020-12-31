@@ -116,14 +116,13 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
           `address/${data.address_id}`,
         );
         setAddress(response.data);
-
-        let value = 0;
-        for (let i = 0; i < cart.length; i++) {
-          const resp = await api.get(`order/${cart[i]}`);
-          value += Number(resp.data.value);
-        }
-        setTotal(value);
       }
+      let value = 0;
+      for (let i = 0; i < cart.length; i++) {
+        const resp = await api.get(`order/${cart[i]}`);
+        value += Number(resp.data.value);
+      }
+      setTotal(value);
     } catch (err) {
       loadData();
     }
@@ -147,54 +146,148 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
   }
 
   async function createServiceOrder() {
-    setLoading(true);
-    if (cart.length > 0) {
-      const cli = await api.get(`client_byemail/${data.email}`);
-      try {
-        const response = await api.post(`serviceorder`, {
-          situation: 'Emitido',
-          describe: '[PEDIDO EFETUADO PELO SITE]',
-          value: total,
-          client_id: cli.data.id,
-          address_id: address?.id,
-        });
-        let stock = true;
-        for (let i = 0; i < cart.length; i++) {
-          const order = await api.get(`order/${cart[i]}`);
-          const product = await api.get(`product/${order.data.product_id}`);
-          if (
-            product.data.stock !== -1 &&
-            product.data.stock < order.data.quantity
-          ) {
-            stock = false;
+    if (!address) {
+      if (
+        window.confirm(
+          'Você não cadastrou um endereço de entrega, dessa forma o seu pedido será disponível apenas para retirada na loja física, deseja continuar?',
+        )
+      ) {
+        setLoading(true);
+        if (cart.length > 0) {
+          const cli = await api.get(`client_byemail/${data.email}`);
+          try {
+            const response = await api.post(`serviceorder`, {
+              situation: 'Emitido',
+              describe: '[PEDIDO EFETUADO PELO SITE]',
+              value: total,
+              client_id: cli.data.id,
+            });
+            let stock = true;
+            for (let i = 0; i < cart.length; i++) {
+              const order = await api.get(`order/${cart[i]}`);
+              const product = await api.get(`product/${order.data.product_id}`);
+              if (
+                product.data.stock !== -1 &&
+                product.data.stock < order.data.quantity
+              ) {
+                stock = false;
+                toast.error(
+                  `O produto ${product.data.name} não possui estoque disponível.`,
+                  { position: 'bottom-center' },
+                );
+                await api.delete(`serviceorder/${response.data.id}`);
+                setLoading(false);
+                break;
+              }
+            }
+            if (stock) updateOrders(response.data.id);
+          } catch (err) {
             toast.error(
-              `O produto ${product.data.name} não possui estoque disponível.`,
-              { position: 'bottom-center' },
+              'Falha ao finalizar pedido, tente novamente mais tarde',
+              {
+                position: 'bottom-center',
+              },
             );
-            await api.delete(`serviceorder/${response.data.id}`);
             setLoading(false);
-            break;
           }
+        } else {
+          toast.info('É necessário ter pelo menos um item no carrinho!', {
+            position: 'bottom-center',
+          });
         }
-        if (stock) updateOrders(response.data.id);
-      } catch (err) {
-        toast.error('Falha ao finalizar pedido, tente novamente mais tarde', {
-          position: 'bottom-center',
-        });
-        setLoading(false);
       }
     } else {
-      toast.info('É necessário ter pelo menos um item no carrinho!', {
-        position: 'bottom-center',
-      });
+      setLoading(true);
+      if (cart.length > 0) {
+        const cli = await api.get(`client_byemail/${data.email}`);
+        try {
+          const response = await api.post(`serviceorder`, {
+            situation: 'Emitido',
+            describe: '[PEDIDO EFETUADO PELO SITE]',
+            value: total,
+            client_id: cli.data.id,
+            address_id: address?.id,
+          });
+          let stock = true;
+          for (let i = 0; i < cart.length; i++) {
+            const order = await api.get(`order/${cart[i]}`);
+            const product = await api.get(`product/${order.data.product_id}`);
+            if (
+              product.data.stock !== -1 &&
+              product.data.stock < order.data.quantity
+            ) {
+              stock = false;
+              toast.error(
+                `O produto ${product.data.name} não possui estoque disponível.`,
+                { position: 'bottom-center' },
+              );
+              await api.delete(`serviceorder/${response.data.id}`);
+              setLoading(false);
+              break;
+            }
+          }
+          if (stock) updateOrders(response.data.id);
+        } catch (err) {
+          toast.error('Falha ao finalizar pedido, tente novamente mais tarde', {
+            position: 'bottom-center',
+          });
+          setLoading(false);
+        }
+      } else {
+        toast.info('É necessário ter pelo menos um item no carrinho!', {
+          position: 'bottom-center',
+        });
+      }
     }
   }
 
   async function updateOrders(id: number) {
     try {
+      let frete: number;
+      let prazo: number;
       for (let i = 0; i < cart.length; i++) {
+        frete = 0;
+        prazo = 0;
+        const order = await api.get(`order/${cart[i]}`);
+        const product = await api.get(`product/${order.data.product_id}`);
+        if (address) {
+          if (product.data.unit === 2 || product.data.unit === 3) {
+            const freteReq = await api.post(`calcula_frete`, {
+              cep: address?.zipcode,
+              peso: 2,
+              comprimento: 15,
+              altura: 15,
+              largura: order.data.width,
+            });
+            let fr: string = freteReq.data.Valor;
+            fr = fr.replace(',', '.');
+            frete = Number(fr);
+
+            let pr: string = freteReq.data.PrazoEntrega;
+            pr = pr.replace(',', '.');
+            prazo = Number(pr);
+          } else {
+            const freteReq = await api.post(`calcula_frete`, {
+              cep: address?.zipcode,
+              peso: 1,
+              comprimento: 15,
+              altura: product.data.height,
+              largura: product.data.width,
+            });
+            let fr: string = freteReq.data.Valor;
+            fr = fr.replace(',', '.');
+            frete = Number(fr);
+
+            let pr: string = freteReq.data.PrazoEntrega;
+            pr = pr.replace(',', '.');
+            prazo = Number(pr);
+          }
+        }
+        frete += 10;
         await api.put(`order/${cart[i]}`, {
           serviceorder_id: id,
+          shipping: frete,
+          deadline_shipping: prazo,
         });
       }
       store.store.dispatch({
@@ -208,6 +301,7 @@ const Cart: React.FC<IProps> = ({ data, cart }: IProps) => {
       toast.error('Falha ao finalizar pedido, tente novamente mais tarde', {
         position: 'bottom-center',
       });
+      setLoading(false);
     }
   }
 
