@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -101,6 +102,9 @@ function LojaNavbar({ data, signed }: IProps) {
     toast.info('Aguarde, processando...', { position: 'bottom-center' });
     store.store.dispatch({
       type: AuthTypes.AUTH_LOGOUT,
+    });
+    setTimeout(function () {
+      window.location.reload();
     });
   }
 

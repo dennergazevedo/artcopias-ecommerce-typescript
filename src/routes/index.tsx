@@ -23,6 +23,7 @@ import ProductDetails from '../views/ProductDetails';
 
 import Cart from '../views/Cart';
 import Checkout from '../views/Checkout';
+import Account from '../views/Account';
 
 import Register from '../views/Register';
 
@@ -54,6 +55,7 @@ const Routes: React.FC = () => (
 
     <Route path="/cart" exact component={Cart} isPrivate />
     <Route path="/checkout/:id" exact component={Checkout} isPrivate />
+    <Route path="/profile" exact component={Account} isPrivate />
 
     <Route path="/sign-up" exact component={Register} isRegister />
 

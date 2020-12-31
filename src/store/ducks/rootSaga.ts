@@ -13,6 +13,8 @@ import {
   forgotPass,
   resetPass,
   bePartner,
+  updateClient,
+  updatePassword,
 } from './client/sagas';
 import { mailContactRequest, mailBudgetRequest } from './mail/sagas';
 import { addCart, removeCart } from './cart/sagas';
@@ -28,6 +30,8 @@ export default function* rootSaga() {
     takeLatest<any>(ClientTypes.CLIENT_FORGOTPASS, forgotPass),
     takeLatest<any>(ClientTypes.CLIENT_RESETPASS, resetPass),
     takeLatest<any>(ClientTypes.CLIENT_PARTNER, bePartner),
+    takeLatest<any>(ClientTypes.CLIENT_UPDATE, updateClient),
+    takeLatest<any>(ClientTypes.CLIENT_UPDATE_PASS, updatePassword),
     // MAIL
     takeLatest<any>(MailTypes.MAIL_CONTACT_REQUEST, mailContactRequest),
     takeLatest<any>(MailTypes.MAIL_BUDGET_REQUEST, mailBudgetRequest),

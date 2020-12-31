@@ -7,6 +7,8 @@ export enum ClientTypes {
   CLIENT_FORGOTPASS = '@client/CLIENT_FORGOTPASS',
   CLIENT_RESETPASS = '@client/CLIENT_RESETPASS',
   CLIENT_PARTNER = '@client/CLIENT_PARTNER',
+  CLIENT_UPDATE = '@client/CLIENT_UPDATE',
+  CLIENT_UPDATE_PASS = '@client/CLIENT_UPDATE_PASS',
 }
 
 /** Data types */

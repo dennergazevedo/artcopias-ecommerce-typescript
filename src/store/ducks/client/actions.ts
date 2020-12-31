@@ -39,3 +39,16 @@ interface IPartner {
 }
 export const clientPartnerRequest = (data: IPartner) =>
   action(ClientTypes.CLIENT_PARTNER, { data });
+
+export const clientUpdate = (data: IClient) =>
+  action(ClientTypes.CLIENT_UPDATE, { data });
+
+/** Interface */
+interface IResetPass {
+  id: number;
+  password: string;
+  oldPassword: string;
+}
+
+export const clientUpdatePass = (data: IResetPass) =>
+  action(ClientTypes.CLIENT_UPDATE_PASS, { data });

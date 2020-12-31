@@ -84,6 +84,7 @@ const Cadastro: React.FC = () => {
   }
 
   function handleLogin() {
+    event?.preventDefault();
     if (validator.isEmail(email)) {
       if (password.length >= 8) {
         toast.info('Aguarde, processando...', { position: 'bottom-center' });
@@ -117,7 +118,7 @@ const Cadastro: React.FC = () => {
             </h3>
             <span>Preencha seus dados com atenção.</span>
           </Title>
-          <Form>
+          <Form onSubmit={handleLogin}>
             <div>
               <span>*E-mail:</span>
               <input
@@ -144,9 +145,7 @@ const Cadastro: React.FC = () => {
               </span>
             </div>
 
-            <button type="button" onClick={handleLogin}>
-              Entrar
-            </button>
+            <button type="submit">Entrar</button>
           </Form>
         </Left>
         <Right>

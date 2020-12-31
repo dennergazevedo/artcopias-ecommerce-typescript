@@ -128,3 +128,68 @@ export function* bePartner({ data }: IPartner) {
     );
   }
 }
+
+/** Interface */
+interface IClient {
+  id?: number;
+  name?: string;
+  contact?: string;
+  phone?: string;
+  document?: string;
+  email?: string;
+}
+
+interface IPropsIClient {
+  data: IClient;
+}
+
+export function* updateClient({ data }: IPropsIClient) {
+  try {
+    yield call(api.put, `client/${data.id}`, data);
+
+    toast.success('Dados atualizados com sucesso!', {
+      position: 'bottom-center',
+    });
+    setTimeout(function () {
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    toast.error('Erro ao atualizar dados, tente novamente mais tarde!', {
+      position: 'bottom-center',
+    });
+  }
+}
+
+/** Interface */
+interface IResetPass {
+  id: number;
+  password: string;
+  oldPassword: string;
+}
+
+interface IPropsResetPass {
+  data: IResetPass;
+}
+
+export function* updatePassword({ data }: IPropsResetPass) {
+  try {
+    yield call(api.put, `client_update_pass/${data.id}`, {
+      password: data.password,
+      oldPassword: data.oldPassword,
+    });
+
+    toast.success('Senha atualizada com sucesso!', {
+      position: 'bottom-center',
+    });
+    setTimeout(function () {
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    toast.error(
+      'Erro ao atualizar senha, verifique os dados e tente novamente!',
+      {
+        position: 'bottom-center',
+      },
+    );
+  }
+}
